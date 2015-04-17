@@ -1,0 +1,4 @@
+#FontTools==2.4
+#Shapely==1.5.6
+#numpy==1.9.0
+#robofab==1.2.1
