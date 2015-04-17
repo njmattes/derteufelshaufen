@@ -2,6 +2,8 @@
 from __future__ import division
 from math import tan, atan2, sin, cos, sqrt, radians, degrees
 from math import pi as math_pi
+from textura.components import Components
+from textura.glyphs import Glyphs
 
 
 class Font(object):
@@ -13,11 +15,14 @@ class Font(object):
         self._overlap = x
         self._phi = None
         self._pi = None
-        self.height = 700
-        self.ascent = 200
         self.n = .5
         self.nl = .5
         self.nr = .5
+        self.components = Components(self.stem, self.counter, self.radius,
+                                     self.overlap, self.theta, self.phi,
+                                     self.pi, self.sigma)
+        self.g = Glyphs(self.components)
+
 
     @property
     def theta(self):
@@ -122,4 +127,3 @@ class Font(object):
         )
         sigma += (self.stem * 2 + self.counter)
         return sigma
-
