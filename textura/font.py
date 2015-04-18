@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import tan, atan2, sin, cos, sqrt, radians, degrees
+from math import tan, atan2, sin, asin, cos, sqrt, radians, degrees
 from math import pi as math_pi
 from textura.components import Components
 from textura.glyphs import Glyphs
@@ -103,13 +103,10 @@ class Font(object):
         :rtype: float
         """
         if self._phi is None:
-            b = self.stem + self.counter + self.radius + (
-                self.stem - 2 * self.radius) - self.overlap
-            c = sqrt(self.a ** 2 + b ** 2)
-            _phi = atan2(self.a, b)
-            b = sqrt(c ** 2 - self.radius ** 2)
-            _phi += atan2(self.radius, b)
-            self._phi = _phi
+            h = self.offset + self.overlap * tan(self.theta)
+            w = 2 * self.stem + self.counter - self.overlap - self.radius
+            self._phi = asin(self.radius / sqrt(h ** 2 + w ** 2)) + tan(h / w)
+
         return self._phi
 
     @property
