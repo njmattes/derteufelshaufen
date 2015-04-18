@@ -14,19 +14,19 @@ if __name__ == '__main__':
 
     f = Font(20, 100, 30, radius=9, x=15)
     ax = plt.subplot(231, aspect='equal')
-    draw(f.g.v, ax)
+    draw(f.g.o, ax)
     ax = plt.subplot(234, aspect='equal')
     draw(f.g.n, ax)
 
     f = Font(75, 100, 45, radius=30, x=30)
     ax = plt.subplot(232, aspect='equal')
-    draw(f.g.v, ax)
+    draw(f.g.o, ax)
     ax = plt.subplot(235, aspect='equal')
     draw(f.g.n, ax)
 
-    f = Font(200, 100, 20, radius=90, x=150)
+    f = Font(200, 100, 20, radius=90, x=100)
     ax = plt.subplot(233, aspect='equal')
-    draw(f.g.v, ax)
+    draw(f.g.o, ax)
     ax = plt.subplot(236, aspect='equal')
     draw(f.g.n, ax)
 

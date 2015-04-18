@@ -11,7 +11,6 @@ class Glyphs(object):
 
     def zero(self, g):
         g = np.array(g)
-        print g[0][:]
         g[0][:] -= min(g[0][:])
         g[1][:] -= min(g[1][:])
         return g
