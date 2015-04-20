@@ -61,11 +61,19 @@ class Construction(object):
         return sigma
 
     @property
+    def rho(self):
+        return 2 * self.s - self.c - self.sigma
+
+    @property
     def phi_steep(self):
         if self._phi_steep is None:
-            _phi_steep = 4 * self.r * cos(self.theta)
-            _phi_steep /= 2 * self.sigma - (self.overlap + self.s)
-            self._phi_steep = asin(_phi_steep) - self.theta
+            # _phi_steep = 4 * self.r * cos(self.theta)
+            # _phi_steep /= 2 * self.sigma - (self.overlap + self.s)
+            # print 1,_phi_steep
+            # self._phi_steep = asin(_phi_steep) - self.theta
+
+            x = self.sigma - 2 * self.r * cos(self.theta)
+            self._phi_steep = atan(x * tan(self.theta / abs(self.s - x)))
         return self._phi_steep
 
     @property

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 from math import cos, tan, sin
+from math import pi as math_pi
 
 
 class Components(object):
@@ -23,6 +24,10 @@ class Components(object):
 
     def moveto_lower_bowl(self, xs, ys):
         ys[-1] = self.si * tan(self.th)
+        return xs, ys
+
+    def moveto_upper_bowl(self, xs, ys):
+        ys[-1] = self.height - self.si * tan(self.th)
         return xs, ys
 
     def moveto_foot_serif(self, xs, ys):
@@ -161,6 +166,42 @@ class Components(object):
         a = self.ph
         cn = self.c * self.nl
 
+    def lower_bowl(self, xs, ys):
+        _x = xs[-1]
+        _y = self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= self.si
+        _y -= self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = (self.s * 2 + self.c) - self.si
+        _x -= _xx
+        _y += _xx * tan(self.ph)
+        xs.append(_x)
+        ys.append(_y)
+        return xs, ys
+
+    def upper_bowl(self, xs, ys):
+        _x = xs[-1]
+        _y = self.height - self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += self.si
+        _y += self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = (self.s * 2 + self.c) - self.si
+        _x += _xx
+        _y -= _xx * tan(self.ph)
+        xs.append(_x)
+        ys.append(_y)
+        return xs, ys
+
     def upper_counter(self, xs, ys):
         _x = xs[-1]
 
@@ -226,25 +267,7 @@ class Components(object):
 
         return xs, ys
 
-    def lower_bowl(self, xs, ys):
-        _x = xs[-1]
-        _y = self.si * tan(self.th)
-        xs.append(_x)
-        ys.append(_y)
-
-        _x -= self.si
-        _y -= self.si * tan(self.th)
-        xs.append(_x)
-        ys.append(_y)
-
-        _xx = (self.s * 2 + self.c) - self.si
-        _x -= _xx
-        _y += _xx * tan(self.ph)
-        xs.append(_x)
-        ys.append(_y)
-        return xs, ys
-
-    def upper_bowl(self, xs, ys):
+    def upper_finial(self,xs, ys):
         _x = xs[-1]
         _y = self.height - self.si * tan(self.th)
         xs.append(_x)
@@ -255,9 +278,48 @@ class Components(object):
         xs.append(_x)
         ys.append(_y)
 
-        _xx = (self.s * 2 + self.c) - self.si
+        phi = (math_pi / 2 - self.ph) * .9
+        _xx = (self.s * 2 + self.c) * .9 - self.si
         _x += _xx
-        _y -= _xx * tan(self.ph)
+        _y -= _xx / tan(phi)
         xs.append(_x)
         ys.append(_y)
+
+        _x -= 2 * self.r * cos(phi)
+        _y -= 2 * self.r * sin(phi)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = (self.s * 2 + self.c) * .9 - 2 * self.r * cos(phi) - self.s
+        print _xx
+        _x -= _xx
+        _y += _xx / tan(phi)
+        xs.append(_x)
+        ys.append(_y)
+
+        return xs, ys
+
+    def lower_finial(self, xs, ys):
+        rho = (self.s * 2 + self.c) * .9 ** 2 - self.si
+        _x = xs[-1]
+        _y = (self.si + rho - self.s) * tan(self.ph / 2) + 2 * self.r * cos(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += (self.si + rho - self.s)
+        _y -= (self.si + rho - self.s) * tan(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= 2 * self.r * sin(self.ph / 2)
+        _y -= 2 * self.r * cos(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = (self.s * 2 + self.c) * .9 ** 2 - 2 * self.r * sin(self.ph / 2)
+        _x -= _xx
+        _y += _xx * tan(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
         return xs, ys
