@@ -5,20 +5,33 @@ from math import cos, tan, sin
 
 class Components(object):
 
-    def __init__(self, s, c, r, o, th, ph, pi, si):
+    def __init__(self, construction):
         self.height = 700
         self.ascent = 200
         self.n = .5
         self.nl = .5
         self.nr = .5
-        self.s = s
-        self.c = c
-        self.o = o
-        self.r = r
-        self.th = th
-        self.ph = ph
-        self.pi = pi
-        self.si = si
+        self.s = construction.s
+        self.c = construction.c
+        self.o = construction.overlap
+        self.r = construction.r
+        self.th = construction.theta
+        self.ph = construction.phi
+        self.phs = construction.phi_steep
+        self.pi = construction.pi
+        self.si = construction.sigma
+
+    def moveto_lower_bowl(self, xs, ys):
+        ys[-1] = self.si * tan(self.th)
+        return xs, ys
+
+    def moveto_foot_serif(self, xs, ys):
+        ys[-1] = (tan(self.ph) * self.c * self.n + 2 * self.r * cos(self.ph))
+        return xs, ys
+
+    def moveto_ascender(self, xs, ys):
+        ys[-1] = self.height + self.ascent - self.s * tan(self.th)
+        return xs, ys
 
     def ascender(self, xs, ys):
         _x = xs[-1]
