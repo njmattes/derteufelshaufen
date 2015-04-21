@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import cos, tan, sin
+from math import cos, tan, sin, atan, degrees
 from math import pi as math_pi
 
 
@@ -28,6 +28,11 @@ class Components(object):
         ys[-1] = self.si * tan(self.th)
         return xs, ys
 
+    def moveto_lower_counter(self, xs, ys):
+        ys[-1] = _y = self.si * tan(self.th)
+        ys[-1] += (self.s + self.c - self.o) * tan(self.ph)
+        return xs, ys
+
     def moveto_upper_bowl(self, xs, ys):
         ys[-1] = self.height - self.si * tan(self.th)
         return xs, ys
@@ -40,9 +45,13 @@ class Components(object):
         ys[-1] = self.height + self.ascent - self.s * tan(self.th)
         return xs, ys
 
-    def ascender(self, xs, ys):
+    def lineto_ascender(self, xs, ys):
         _x = xs[-1]
         _y = self.height + self.ascent - self.s * tan(self.th)
+        return _x, _y
+
+    def ascender(self, xs, ys):
+        _x, _y = self.lineto_ascender(xs, ys)
         xs.append(_x)
         ys.append(_y)
 
@@ -317,6 +326,59 @@ class Components(object):
         _xx = (self.s * 2 + self.c) * .9 ** 2 - 2 * self.r * sin(self.ph / 2)
         _x -= _xx
         _y += _xx * tan(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        return xs, ys
+
+    def d(self, xs, ys):
+        _x = xs[-1]
+        _y = ys[-1]
+
+        ang = atan((2 * self.s + self.c) / self.ascent)
+        print degrees(ang)
+
+        _x += self.c
+        _y -= self.c * tan(self.ph)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = self.s + self.c + 2 * self.r * cos(ang)
+        _y = self.height + self.ascent - _xx / tan(ang) - 2 * self.r * sin(ang)
+        xs.append(_x)
+        ys.append(_y)
+
+
+        _x -= _xx
+        _y += _xx / tan(ang)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += 2 * self.r * cos(ang)
+        _y += 2 * self.r * sin(ang)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += 2 * self.s + self.c
+        _y -= self.ascent
+        xs.append(_x)
+        ys.append(_y)
+
+        _y = self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        xs, ys = self.lower_bowl(xs, ys)
+
+        _x = xs[-1]
+        _y = self.height + self.ascent - 2 * self.r * sin(ang)
+        _y -= _xx / tan(ang)
+        _y -= self.s * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += self.s
+        _y += self.s * tan(self.th)
         xs.append(_x)
         ys.append(_y)
 

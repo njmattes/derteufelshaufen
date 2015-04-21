@@ -38,6 +38,15 @@ class Glyphs(object):
         return [self.zero(coords)]
 
     @property
+    def d(self):
+        coords = [[0, ], [0, ], ]
+        coords = self.components.moveto_lower_counter(*coords)
+        coords = self.components.d(*coords)
+        coords[0].append(coords[0][0])
+        coords[1].append(coords[1][0])
+        return [self.zero(coords)]
+
+    @property
     def n(self):
         coords = [[0,], [0, ]]
         coords = self.components.moveto_foot_serif(*coords)
