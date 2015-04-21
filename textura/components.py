@@ -14,13 +14,15 @@ class Components(object):
         self.nr = .5
         self.s = construction.s
         self.c = construction.c
-        self.o = construction.overlap
+        self.x = construction.overlap
+        self.o = construction.offset
         self.r = construction.r
         self.th = construction.theta
         self.ph = construction.phi
         self.phs = construction.phi_steep
         self.pi = construction.pi
         self.si = construction.sigma
+        self.pinch_y = construction.pinch_y
 
     def moveto_lower_bowl(self, xs, ys):
         ys[-1] = self.si * tan(self.th)
@@ -206,9 +208,7 @@ class Components(object):
         _x = xs[-1]
 
         _y = self.height - self.si * tan(self.th)
-        _y -= (self.s - self.o - self.o * tan(self.th) / tan(self.ph)) * tan(self.ph)
-        _y -= (self.s + self.c - self.o) * tan(self.ph)# _y -= (self.s * 2 + self.c - self.o - 2 * self.r -
-        #     self.r * (1 - sin(self.ph))) * tan(self.ph)
+        _y -= self.pinch_y * self.c * tan(self.ph)
         xs.append(_x)
         ys.append(_y)
 
@@ -223,7 +223,7 @@ class Components(object):
         _x = xs[-1]
 
         _y = self.si * tan(self.th)
-        _y += (self.s + self.c - self.o) * tan(self.ph)
+        _y += self.pinch_y + self.c * tan(self.ph)
         xs.append(_x)
         ys.append(_y)
 
@@ -241,8 +241,7 @@ class Components(object):
 
         _x = self.s + self.c
         _y = self.height - self.si * tan(self.th)
-        _y -= (self.s - self.o - self.o * tan(self.th) / tan(self.ph)) * tan(self.ph)
-        _y -= (self.s + self.c - self.o) * tan(self.ph)
+        _y -= self.pinch_y + self.c * tan(self.ph)
         xs.append(_x)
         ys.append(_y)
 
@@ -252,8 +251,7 @@ class Components(object):
         ys.append(_y)
 
         _y = self.si * tan(self.th)
-        _y += (self.s - self.o - self.o * tan(self.th) / tan(self.ph)) * tan(self.ph)
-        _y += (self.s + self.c - self.o) * tan(self.ph)
+        _y += self.pinch_y + self.c * tan(self.ph)
         xs.append(_x)
         ys.append(_y)
 
