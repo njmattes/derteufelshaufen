@@ -29,8 +29,9 @@ class Components(object):
         return xs, ys
 
     def moveto_lower_counter(self, xs, ys):
-        ys[-1] = _y = self.si * tan(self.th)
-        ys[-1] += (self.s + self.c - self.o) * tan(self.ph)
+        ys[-1] = self.si * tan(self.th)
+        ys[-1] += self.pinch_y + self.c * tan(self.ph)
+        # ys[-1] += (self.s + self.c - self.o) * tan(self.ph)
         return xs, ys
 
     def moveto_upper_bowl(self, xs, ys):
@@ -217,7 +218,8 @@ class Components(object):
         _x = xs[-1]
 
         _y = self.height - self.si * tan(self.th)
-        _y -= self.pinch_y * self.c * tan(self.ph)
+        _y -= self.pinch_y + self.c * tan(self.ph)
+        print _y, self.pinch_y
         xs.append(_x)
         ys.append(_y)
 
@@ -298,7 +300,6 @@ class Components(object):
         ys.append(_y)
 
         _xx = (self.s * 2 + self.c) * .9 - 2 * self.r * cos(phi) - self.s
-        print _xx
         _x -= _xx
         _y += _xx / tan(phi)
         xs.append(_x)

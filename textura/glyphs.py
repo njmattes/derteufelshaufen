@@ -65,6 +65,8 @@ class Glyphs(object):
         coords = self.components.moveto_lower_bowl(*coords)
         coords = self.components.lower_bowl(*coords)
         coords = self.components.upper_bowl(*coords)
+        coords[0].append(coords[0][0])
+        coords[1].append(coords[1][0])
         return [self.zero(coords), self.components.counter()]
 
     @property

@@ -106,5 +106,4 @@ class Construction(object):
     def pinch_y(self):
         y = (self.offset + self.r * cos(self.phi))
         y -= tan(self.phi) * ((self.s + self.c) - (self.r * (1 + sin(self.phi))))
-        print y
         return y
