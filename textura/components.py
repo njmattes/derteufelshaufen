@@ -9,6 +9,7 @@ class Components(object):
     def __init__(self, construction):
         self.height = 700
         self.ascent = 200
+        self.descent = 120
         self.n = .5
         self.nl = .5
         self.nr = .5
@@ -25,21 +26,28 @@ class Components(object):
         self.pinch_y = construction.pinch_y
 
     def moveto_lower_bowl(self, xs, ys):
+        xs[-1] = self.s * 2 + self.c
         ys[-1] = self.si * tan(self.th)
         return xs, ys
 
     def moveto_lower_counter(self, xs, ys):
+        xs[-1] = self.s
         ys[-1] = self.si * tan(self.th)
         ys[-1] += self.pinch_y + self.c * tan(self.ph)
         # ys[-1] += (self.s + self.c - self.o) * tan(self.ph)
         return xs, ys
 
     def moveto_upper_bowl(self, xs, ys):
+        xs[-1] = 0
         ys[-1] = self.height - self.si * tan(self.th)
         return xs, ys
 
     def moveto_foot_serif(self, xs, ys):
         ys[-1] = (tan(self.ph) * self.c * self.n + 2 * self.r * cos(self.ph))
+        return xs, ys
+
+    def moveto_upper_left_shoulder_serif(self, xs, ys):
+        ys[-1] = self.height - 2 * self.r * cos(self.ph) - self.c * self.nl * tan(self.ph)
         return xs, ys
 
     def moveto_ascender(self, xs, ys):
@@ -337,7 +345,6 @@ class Components(object):
         _y = ys[-1]
 
         ang = atan((2 * self.s + self.c) / self.ascent)
-        print degrees(ang)
 
         _x += self.c
         _y -= self.c * tan(self.ph)
@@ -384,3 +391,33 @@ class Components(object):
         ys.append(_y)
 
         return xs, ys
+
+    def p(self, xs, ys):
+        _x = xs[-1]
+        _y = self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= self.si
+        _y -= self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = self.s + self.c - self.si
+        _x -= _xx
+        _y += _xx * tan(self.ph)
+        xs.append(_x)
+        ys.append(_y)
+
+        _y -= self.descent - self.s * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= self.s
+        _y -= self.s * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        return xs, ys
+
+

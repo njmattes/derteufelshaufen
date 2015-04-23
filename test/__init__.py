@@ -10,21 +10,23 @@ def draw(g, ax):
         ax.plot(c[0], c[1], color='black', )
 
 def draw_alpha(s, c, a, r, x):
-    plt.figure(figsize=(24, 8))
-    n =6
+    plt.figure(figsize=(24, 4))
+    n = 7
 
     f = Font(s, c, a, radius=r, x=x)
-    ax = plt.subplot('1{}1'.format(n), aspect='equal')
+    ax = plt.subplot('1{}4'.format(n), aspect='equal')
+    draw(f.g.n, ax)
+    ax = plt.subplot('1{}1'.format(n), sharey=ax, aspect='equal')
     draw(f.g.b, ax)
     ax = plt.subplot('1{}2'.format(n), sharey=ax, aspect='equal')
     draw(f.g.c, ax)
     ax = plt.subplot('1{}3'.format(n), sharey=ax, aspect='equal')
     draw(f.g.d, ax)
-    ax = plt.subplot('1{}4'.format(n), sharey=ax, aspect='equal')
-    draw(f.g.n, ax)
     ax = plt.subplot('1{}5'.format(n), sharey=ax, aspect='equal')
     draw(f.g.o, ax)
     ax = plt.subplot('1{}6'.format(n), sharey=ax, aspect='equal')
+    draw(f.g.p, ax)
+    ax = plt.subplot('1{}7'.format(n), sharey=ax, aspect='equal')
     draw(f.g.v, ax)
 
     plt.show()
@@ -76,7 +78,7 @@ def draw_c_o():
     plt.show()
 
 def draw_d_o():
-    plt.figure(figsize=(15, 8))
+    plt.figure(figsize=(20, 4))
 
     f = Font(20, 100, 30, radius=9, x=15)
     ax = plt.subplot(231, aspect='equal')
@@ -101,4 +103,4 @@ def draw_d_o():
 
 if __name__ == '__main__':
     # draw_d_o()
-    draw_alpha(20, 100, 35, 9, 10)
+    draw_alpha(20, 80, 30, 10, 10)
