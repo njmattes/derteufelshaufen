@@ -103,4 +103,5 @@ def draw_d_o():
 
 if __name__ == '__main__':
     # draw_d_o()
-    draw_alpha(20, 80, 30, 10, 10)
+    draw_alpha(200, 80, 20, 95, 10)
+    draw_alpha(70, 80, 45, 34, 10)

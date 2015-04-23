@@ -13,6 +13,7 @@ class Components(object):
         self.n = .5
         self.nl = .5
         self.nr = .5
+        self.nf = .9
         self.s = construction.s
         self.c = construction.c
         self.x = construction.overlap
@@ -285,6 +286,56 @@ class Components(object):
         return xs, ys
 
     def upper_finial(self,xs, ys):
+        """ /`\
+             \/
+        :param xs:
+        :type xs:
+        :param ys:
+        :type ys:
+        :return:
+        :rtype:
+        """
+        _x = xs[-1]
+        _y = self.height - self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        cn = self.c * self.nf
+        phi = (math_pi / 2 - self.ph) * self.nf
+        rho = self.s + cn + 2 * self.r * cos(phi) - self.si
+
+        _x += self.si
+        _y += self.si * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += rho
+        _y -= rho / tan(phi)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= 2 * self.r * cos(phi)
+        _y -= 2 * self.r * sin(phi)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= cn
+        _y += cn / tan(phi)
+        xs.append(_x)
+        ys.append(_y)
+
+        return xs, ys
+
+    def upper_finial2(self,xs, ys):
+        """ /`\
+             \/
+        :param xs:
+        :type xs:
+        :param ys:
+        :type ys:
+        :return:
+        :rtype:
+        """
         _x = xs[-1]
         _y = self.height - self.si * tan(self.th)
         xs.append(_x)
@@ -316,6 +367,34 @@ class Components(object):
         return xs, ys
 
     def lower_finial(self, xs, ys):
+        cn = self.c * self.nf * .9
+        phi = (math_pi / 2 - self.ph) * self.nf *.9
+        rho = self.s + cn + 2 * self.r * cos(phi) - self.si
+
+        _x = xs[-1]
+        _y = (self.si + rho - self.s) * tan(self.ph / 2) + 2 * self.r * cos(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x += (self.si + rho - self.s)
+        _y -= (self.si + rho - self.s) * tan(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        _x -= 2 * self.r * sin(self.ph / 2)
+        _y -= 2 * self.r * cos(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        _xx = rho + self.si - 2 * self.r * sin(self.ph / 2)
+        _x -= _xx
+        _y += _xx * tan(self.ph / 2)
+        xs.append(_x)
+        ys.append(_y)
+
+        return xs, ys
+
+    def lower_finial2(self, xs, ys):
         rho = (self.s * 2 + self.c) * .9 ** 2 - self.si
         _x = xs[-1]
         _y = (self.si + rho - self.s) * tan(self.ph / 2) + 2 * self.r * cos(self.ph / 2)
