@@ -122,13 +122,15 @@ class Components(object):
         ys.append(_y)
 
         #left-side of notch
-        _x += self.eta
-        _y -= tan(a) * self.eta
+        _x += self.eta[0]
+        _y -= tan(a) * self.eta[0]
         xs.append(_x)
         ys.append(_y)
 
-        _x += self.si - (self.eta + 2 * self.r * sin(a) - cn) # /
-        _y += tan(a) * self.eta
+        # _x += self.si - (self.eta + 2 * self.r * sin(a) - cn) # /
+        _x += self.eta[1]
+        # _y += tan(a) * self.eta[1]
+        _y += tan(self.th) * self.eta[1]
         xs.append(_x)
         ys.append(_y)
 
@@ -230,7 +232,7 @@ class Components(object):
 
         _y = self.height - self.si * tan(self.th)
         _y -= self.pinch_y + self.c * tan(self.ph)
-        print _y, self.pinch_y
+        # print _y, self.pinch_y
         xs.append(_x)
         ys.append(_y)
 
@@ -505,11 +507,14 @@ class Components(object):
         #TODO: Base shoulder on width of NW crotch in n
         _x = xs[-1]
         _y = self.height - (self.si - self.s) * tan(self.th)
+        # _y = self.height - self.eta[0] * tan(self.ph)
         xs.append(_x)
         ys.append(_y)
 
         _x += (self.si - self.s)
         _y += (self.si - self.s) * tan(self.th)
+        # _x += self.eta[1]
+        # _y += self.eta[1] * tan(self.th)
         xs.append(_x)
         ys.append(_y)
 

@@ -159,7 +159,6 @@ class Constructor(object):
         xi[0] = self.stem
         yil = (self.a - self.offset) - tan(self.phi) * (self.stem - self.x)
         yir = yil - tan(self.phi) * self.counter
-        print yl, yil, yir
         yi[0] = height - yl + yil
         xi[1] = self.stem + self.counter
         yi[1] = yi[0] - tan(self.phi) * self.counter

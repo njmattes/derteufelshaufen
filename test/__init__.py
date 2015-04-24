@@ -113,7 +113,7 @@ def draw_h():
     ax = plt.subplot(234, aspect='equal')
     draw(f.g.n, ax)
 
-    f = Font(75, 100, 45, 35, -10)
+    f = Font(75, 100, 45, 35, 40)
     ax = plt.subplot(232, aspect='equal')
     draw(f.g.h, ax)
     ax = plt.subplot(235, aspect='equal')
