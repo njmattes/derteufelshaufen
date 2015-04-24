@@ -47,6 +47,30 @@ class Glyphs(object):
         return [self.zero(coords)]
 
     @property
+    def h(self):
+        coords = [[0,], [0, ]]
+        coords = self.components.moveto_foot_serif(*coords)
+        coords = self.components.foot_serif(*coords)
+        coords = self.components.ascender(*coords)
+        coords = self.components.h_shoulder(*coords)
+        coords = self.components.upper_right_shoulder(*coords)
+        coords = self.components.foot_serif(*coords)
+        coords = self.components.upper_counter(*coords)
+        coords[0].append(coords[0][0])
+        coords[1].append(coords[1][0])
+        return [self.zero(coords)]
+
+    @property
+    def l(self):
+        coords = [[0,], [0, ]]
+        coords = self.components.moveto_foot_serif(*coords)
+        coords = self.components.foot_serif(*coords)
+        coords = self.components.ascender(*coords)
+        coords[0].append(coords[0][0])
+        coords[1].append(coords[1][0])
+        return [self.zero(coords)]
+
+    @property
     def n(self):
         coords = [[0,], [0, ]]
         coords = self.components.moveto_foot_serif(*coords)

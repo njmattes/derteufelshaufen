@@ -107,3 +107,13 @@ class Construction(object):
         y = (self.offset + self.r * cos(self.phi))
         y -= tan(self.phi) * ((self.s + self.c) - (self.r * (1 + sin(self.phi))))
         return y
+
+    @property
+    def eta(self):
+        """Width of one side of NW notch in n
+        :return:
+        """
+        _eta = self.sigma * tan(self.theta)
+        _eta -= (2 * self.r * sin(self.phi) - self.c * self.nl) * tan(self.phi)
+        _eta /= (tan(self.phi) + tan(self.theta))
+        return _eta

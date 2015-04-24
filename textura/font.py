@@ -8,7 +8,7 @@ from textura.glyphs import Glyphs
 
 
 class Font(object):
-    def __init__(self, stem, counter, theta, radius=None, x=None):
+    def __init__(self, stem, counter, theta, radius=None, x=None, ):
         self.stem = stem
         self.counter = float(counter)
         self._theta = radians(float(theta))

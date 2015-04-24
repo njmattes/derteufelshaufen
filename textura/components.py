@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import cos, tan, sin, atan, degrees
+from math import cos, tan, sin, atan, degrees, sqrt
 from math import pi as math_pi
 
 
@@ -10,10 +10,7 @@ class Components(object):
         self.height = 700
         self.ascent = 200
         self.descent = 120
-        self.n = .5
-        self.nl = .5
-        self.nr = .5
-        self.nf = .9
+        self.nf = sqrt(2) / 2
         self.s = construction.s
         self.c = construction.c
         self.x = construction.overlap
@@ -24,7 +21,11 @@ class Components(object):
         self.phs = construction.phi_steep
         self.pi = construction.pi
         self.si = construction.sigma
+        self.eta = construction.eta
         self.pinch_y = construction.pinch_y
+        self.n = construction.n
+        self.nl = construction.nl
+        self.nr = construction.nr
 
     def moveto_lower_bowl(self, xs, ys):
         xs[-1] = self.s * 2 + self.c
@@ -99,6 +100,8 @@ class Components(object):
 
         return xs, ys
 
+
+
     def upper_left_shoulder_serif(self, xs, ys):
         a = self.ph
         cn = self.c * self.nl
@@ -118,15 +121,14 @@ class Components(object):
         xs.append(_x)
         ys.append(_y)
 
-        _xx = (self.si * tan(self.th) - (2 * self.r * sin(a) - cn) * tan(a))
-        _xx /= (tan(a) + tan(self.th))
-        _x += _xx
-        _y -= tan(a) * _xx
+        #left-side of notch
+        _x += self.eta
+        _y -= tan(a) * self.eta
         xs.append(_x)
         ys.append(_y)
 
-        _x += self.si - (_xx + 2 * self.r * sin(a) - cn) # /
-        _y += tan(a) * _xx
+        _x += self.si - (self.eta + 2 * self.r * sin(a) - cn) # /
+        _y += tan(a) * self.eta
         xs.append(_x)
         ys.append(_y)
 
@@ -301,7 +303,7 @@ class Components(object):
         ys.append(_y)
 
         cn = self.c * self.nf
-        phi = (math_pi / 2 - self.ph) * self.nf
+        phi = (math_pi / 2 - self.ph) * self.nf ** 2
         rho = self.s + cn + 2 * self.r * cos(phi) - self.si
 
         _x += self.si
@@ -499,4 +501,16 @@ class Components(object):
 
         return xs, ys
 
+    def h_shoulder(self, xs, ys):
+        #TODO: Base shoulder on width of NW crotch in n
+        _x = xs[-1]
+        _y = self.height - (self.si - self.s) * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
 
+        _x += (self.si - self.s)
+        _y += (self.si - self.s) * tan(self.th)
+        xs.append(_x)
+        ys.append(_y)
+
+        return xs, ys
