@@ -2,6 +2,28 @@
 from __future__ import division
 from math import cos, tan, sin, atan, degrees, sqrt
 from math import pi as math_pi
+import numpy as np
+
+
+class Component(object):
+    def __init__(self, coords):
+        self._coords = coords
+
+    @property
+    def coords(self):
+        return self._coords
+
+    @coords.setter
+    def coords(self, value):
+        self._coords = value
+
+    @property
+    def xs(self):
+        return [x[0] for x in self.coords]
+
+    @property
+    def ys(self):
+        return [x[1] for x in self.coords]
 
 
 class Components(object):
@@ -63,44 +85,28 @@ class Components(object):
 
     def ascender(self, xs, ys):
         _x, _y = self.lineto_ascender(xs, ys)
-        xs.append(_x)
-        ys.append(_y)
-
-        _x += self.s
-        _y += self.s * tan(self.th)
-        xs.append(_x)
-        ys.append(_y)
-
-        return xs, ys
+        c = Component([
+            [_x, _y],
+            [_x + self.s, _y + self.s * tan(self.th)]
+        ])
+        return c.xs, c.ys
 
     def upper_left_serif(self, xs, ys):
-        a = self.ph
         cn = self.c * self.nl
-
-        _x = xs[-1]
-        _y = self.height - 2 * self.r * cos(a) - cn * tan(a)
-        xs.append(_x)
-        ys.append(_y)
-
-        _x -= cn
-        _y += cn * tan(a)
-        xs.append(_x)
-        ys.append(_y)
-
-        _x += 2 * self.r * sin(a)
-        _y += 2 * self.r * cos(a)
-        xs.append(_x)
-        ys.append(_y)
-
-        _xx = self.s + cn - 2 * self.r * sin(a)
-        _x += _xx
-        _y -= _xx * tan(a)
-        xs.append(_x)
-        ys.append(_y)
+        # coords = np.zeros((4, 2, 2))
+        _xx = self.s + cn - 2 * self.r * sin(self.ph)
+        coords = np.array([
+            [[0, 1],
+             [self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph), 0]],
+            [[cn, -1],
+             [cn * tan(self.ph), 1]],
+            [[2 * self.r * sin(self.ph), 1],
+             [2 * self.r * cos(self.ph), 1]],
+            [[_xx, 1],
+             [_xx * tan(self.ph), 1]],
+        ])
 
         return xs, ys
-
-
 
     def upper_left_shoulder_serif(self, xs, ys):
         a = self.ph
