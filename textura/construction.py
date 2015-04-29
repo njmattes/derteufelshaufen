@@ -1,8 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import sqrt, sin, asin, tan, atan, cos
+from math import sqrt, sin, asin, tan, cos
 from math import pi as math_pi
+
 
 class Construction(object):
     def __init__(self, stem, counter, radius, x, theta):

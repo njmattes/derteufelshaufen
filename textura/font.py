@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import tan, atan2, sin, asin, cos, sqrt, radians, degrees
-from math import pi as math_pi
+from math import radians
 from textura.components import Components
 from textura.construction import Construction
 from textura.glyphs import Glyphs
@@ -21,7 +20,6 @@ class Font(object):
         self.nr = .5
         self.construction = Construction(self.stem, self.counter, self.radius,
                                          x, self.theta, )
-
         self.components = Components(self.construction)
         self.g = Glyphs(self.components)
 

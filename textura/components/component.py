@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 class Component(object):
     def __init__(self, coords):
         self._coords = coords

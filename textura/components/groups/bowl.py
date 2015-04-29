@@ -42,11 +42,11 @@ class Bowl(ComponentGroup):
     def upper_bowl(self):
         _xx = (self.s * 2 + self.c) - self.si
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, self.height - self.si * tan(self.th)]],
-            [[ 1, self.si],
-             [ 1, self.si * tan(self.th)]],
-            [[ 1, _xx],
+            [[1, 0],
+             [0, self.height - self.si * tan(self.th)]],
+            [[1, self.si],
+             [1, self.si * tan(self.th)]],
+            [[1, _xx],
              [-1, _xx * tan(self.ph)]]
         ]))
 

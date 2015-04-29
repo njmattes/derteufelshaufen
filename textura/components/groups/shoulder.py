@@ -13,16 +13,16 @@ class Shoulder(ComponentGroup):
     def upper_left_shoulder(self):
         cn = self.c * self.nl
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph)]],
+            [[1, 0],
+             [0, self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph)]],
             [[-1, cn],
-             [ 1, cn * tan(self.ph)]],
-            [[ 1, 2 * self.r * sin(self.ph)],
-             [ 1, 2 * self.r * cos(self.ph)]],
-            [[ 1, self.eta[0]],
+             [1, cn * tan(self.ph)]],
+            [[1, 2 * self.r * sin(self.ph)],
+             [1, 2 * self.r * cos(self.ph)]],
+            [[1, self.eta[0]],
              [-1, self.eta[0] * tan(self.ph)]],
-            [[ 1, self.eta[1]],
-             [ 1, self.eta[1] * tan(self.th)]],
+            [[1, self.eta[1]],
+             [1, self.eta[1] * tan(self.th)]],
         ]))
 
     @property
@@ -30,5 +30,5 @@ class Shoulder(ComponentGroup):
         _xx = 2 * self.s + self.c - self.si
         return Component(np.array([
             [[-1, _xx],
-             [ 1, _xx * tan(self.ph)]]
+             [1, _xx * tan(self.ph)]]
         ]))

@@ -14,20 +14,21 @@ class Serif(ComponentGroup):
 
     def moveto_upper_left_shoulder_serif(self):
         return [0,
-                self.height - 2 * self.r * cos(self.ph) - self.c * self.nl * tan(self.ph)]
+                self.height - 2 * self.r * cos(self.ph) -
+                self.c * self.nl * tan(self.ph)]
 
     @property
     def upper_left_serif(self):
         cn = self.c * self.nl
         _xx = self.s + cn - 2 * self.r * sin(self.ph)
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph)]],
+            [[1, 0],
+             [0, self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph)]],
             [[-1, cn],
-             [ 1, cn * tan(self.ph)]],
-            [[ 1, 2 * self.r * sin(self.ph)],
-             [ 1, 2 * self.r * cos(self.ph)]],
-            [[ 1, _xx],
+             [1, cn * tan(self.ph)]],
+            [[1, 2 * self.r * sin(self.ph)],
+             [1, 2 * self.r * cos(self.ph)]],
+            [[1, _xx],
              [-1, _xx * tan(self.ph)]],
         ]))
 
@@ -44,39 +45,39 @@ class Serif(ComponentGroup):
         cn = self.c * self.nl
         _xx = (self.s + cn) - 2 * self.r * sin(self.ph)
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, tan(self.ph) * self.c * self.n + 2 * self.r * cos(self.ph)]],
-            [[ 1, cn],
-             [ 0, 2 * self.r * cos(self.ph)]],
+            [[1, 0],
+             [0, tan(self.ph) * self.c * self.n + 2 * self.r * cos(self.ph)]],
+            [[1, cn],
+             [0, 2 * self.r * cos(self.ph)]],
             [[-1, 2 * self.r * sin(self.ph)],
-             [ 0, 0]],
+             [0, 0]],
             [[-1, _xx],
-             [ 1, _xx * tan(self.ph)]],
+             [1, _xx * tan(self.ph)]],
         ]))
 
     @property
     def upper_left_shoulder_serif(self):
         cn = self.c * self.nl
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph)]],
+            [[1, 0],
+             [0, self.height - 2 * self.r * cos(self.ph) - cn * tan(self.ph)]],
             [[-1, cn],
-             [ 1, cn * tan(self.ph)]],
-            [[ 1, 2 * self.r * sin(self.ph)],
-             [ 1, 2 * self.r * cos(self.ph)]],
-            [[ 1, self.eta[0]],
+             [1, cn * tan(self.ph)]],
+            [[1, 2 * self.r * sin(self.ph)],
+             [1, 2 * self.r * cos(self.ph)]],
+            [[1, self.eta[0]],
              [-1, self.eta[0] * tan(self.ph)]],
-            [[ 1, self.eta[1]],
-             [ 1, self.eta[1] * tan(self.th)]],
+            [[1, self.eta[1]],
+             [1, self.eta[1] * tan(self.th)]],
         ]))
 
     @property
     def lower_right_shoulder_serif(self):
         cn = self.c * self.nl
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, 2 * self.r * cos(self.ph) + cn * tan(self.ph)]],
-            [[ 1, cn],
+            [[1, 0],
+             [0, 2 * self.r * cos(self.ph) + cn * tan(self.ph)]],
+            [[1, cn],
              [-1, cn * tan(self.ph)]],
             [[-1, 2 * self.r * sin(self.ph)],
              [-1, 2 * self.r * cos(self.ph)]],

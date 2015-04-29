@@ -17,10 +17,11 @@ class Counter(ComponentGroup):
     @property
     def upper_counter(self):
         return Component(np.array([
-            [[ 1, 0],
-             [ 0, self.height - (self.si * tan(self.th) + self.pinch_y + self.c * tan(self.ph))]],
+            [[1, 0],
+             [0, self.height - (self.si * tan(self.th) + self.pinch_y +
+                                self.c * tan(self.ph))]],
             [[-1, self.c],
-             [ 1, self.c * tan(self.ph)]]
+             [1, self.c * tan(self.ph)]]
         ]))
 
     @property
@@ -40,9 +41,11 @@ class Counter(ComponentGroup):
             [[1, self.c],
              [-1, self.c * tan(self.ph)]],
             [[1, 0],
-             [0, self.height - (self.si * tan(self.th) + self.pinch_y + self.c * tan(self.ph))]],
+             [0, self.height - (self.si * tan(self.th) + self.pinch_y +
+                                self.c * tan(self.ph))]],
             [[-1, self.c],
              [1, self.c * tan(self.ph)]],
             [[1, 0],
-             [0, self.si * tan(self.th) + self.pinch_y + self.c * tan(self.ph)]],
+             [0, self.si * tan(self.th) + self.pinch_y +
+              self.c * tan(self.ph)]],
         ]))
