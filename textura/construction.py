@@ -113,13 +113,10 @@ class Construction(object):
         """Width of one side of NW notch in n
         :return:
         """
-        # _eta = self.sigma * tan(self.theta)
-        # _eta -= (2 * self.r * sin(self.phi) - self.c * self.nl) * tan(self.phi)
         _eta = self.sigma + (self.c * self.nl - 2 * self.r * sin(self.phi))
         _eta *= -tan(self.phi)
         _eta /= (tan(self.phi) + tan(self.theta))
         _eta += self.sigma
-        print _eta, (self.c * self.nl - 2 * self.r * sin(self.phi)), self.sigma
         return [
             _eta + (self.c * self.nl - 2 * self.r * sin(self.phi)),
             self.sigma - _eta

@@ -1,8 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import cos, tan, sin
 import numpy as np
-from textura.glyph import Glyph
+from textura.contour import Contour
+
+
+class Glyph(object):
+    def __init__(self, contours, start=None):
+        self._contours = contours
+        self._start = start
+
+    @property
+    def contours(self):
+        return self._contours
+
+    @contours.setter
+    def contours(self, value):
+        self._contours = value
 
 
 class Glyphs(object):
@@ -17,101 +30,109 @@ class Glyphs(object):
 
     @property
     def b(self):
-        coords = [[0, ], [0, ], ]
-        coords = self.components.moveto_lower_bowl(*coords)
-        coords = self.components.lower_bowl(*coords)
-        coords = self.components.ascender(*coords)
-        coords = self.components.lower_counter(*coords)
-        coords = self.components.upper_left_serif(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([Contour([
+            self.components.bowl.lower_bowl,
+            self.components.extender.ascender,
+            self.components.counter.lower_counter,
+            self.components.serif.upper_left_serif,],
+            self.components.bowl.moveto_lower_bowl())])
 
     @property
     def c(self):
-        coords = [[0, ], [0, ], ]
-        coords = self.components.moveto_upper_bowl(*coords)
-        coords = self.components.upper_finial(*coords)
-        coords = self.components.lower_finial(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([Contour([
+            self.components.bowl.lineto_upper_bowl_apex,
+            self.components.finial.upper_finial,
+            self.components.finial.lower_finial,],
+            self.components.bowl.moveto_upper_bowl())])
 
     @property
     def d(self):
-        coords = [[0, ], [0, ], ]
-        coords = self.components.moveto_lower_counter(*coords)
-        coords = self.components.d(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([Contour([
+            self.components.bowl.lower_bowl,
+            self.components.glyph.d_bowl,
+            self.components.counter.lower_counter,
+            self.components.glyph.d_ascent,],
+            self.components.bowl.moveto_lower_bowl())])
 
     @property
     def h(self):
-        coords = [[0,], [0, ]]
-        coords = self.components.moveto_foot_serif(*coords)
-        coords = self.components.foot_serif(*coords)
-        coords = self.components.ascender(*coords)
-        coords = self.components.h_shoulder(*coords)
-        coords = self.components.upper_right_shoulder(*coords)
-        coords = self.components.foot_serif(*coords)
-        coords = self.components.upper_counter(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([Contour([
+            self.components.serif.foot_serif,
+            self.components.extender.ascender,
+            self.components.glyph.h_shoulder,
+            self.components.shoulder.upper_right_shoulder,
+            self.components.serif.foot_serif,
+            self.components.counter.upper_counter,],
+            self.components.serif.moveto_foot_serif())])
 
     @property
     def l(self):
-        coords = [[0,], [0, ]]
-        coords = self.components.moveto_foot_serif(*coords)
-        coords = self.components.foot_serif(*coords)
-        coords = self.components.ascender(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([Contour([
+            self.components.serif.foot_serif,
+            self.components.extender.ascender,
+        ], self.components.serif.moveto_foot_serif())])
 
     @property
     def n(self):
-        coords = [[0,], [0, ]]
-        coords = self.components.moveto_foot_serif(*coords)
-        coords = self.components.foot_serif(*coords)
-        coords = self.components.upper_left_shoulder_serif(*coords)
-        coords = self.components.upper_right_shoulder(*coords)
-        coords = self.components.foot_serif(*coords)
-        coords = self.components.upper_counter(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([Contour([
+            self.components.serif.foot_serif,
+            self.components.serif.upper_left_shoulder_serif,
+            self.components.shoulder.upper_right_shoulder,
+            self.components.serif.foot_serif,
+            self.components.counter.upper_counter,],
+            self.components.serif.moveto_foot_serif())])
 
     @property
     def o(self):
-        coords = [[0,], [0, ], ]
-        coords = self.components.moveto_lower_bowl(*coords)
-        coords = self.components.lower_bowl(*coords)
-        coords = self.components.upper_bowl(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords), self.components.counter()]
+        return Glyph([
+            Contour([
+                self.components.bowl.lower_bowl,
+                self.components.bowl.upper_bowl,],
+                self.components.bowl.moveto_lower_bowl()),
+            Contour([
+                self.components.counter.counter,],
+                self.components.counter.moveto_lower_counter())])
 
     @property
     def p(self):
-        coords = [[0,], [0, ], ]
-        coords = self.components.moveto_upper_left_shoulder_serif(*coords)
-        coords = self.components.upper_left_shoulder_serif(*coords)
-        coords = self.components.upper_right_shoulder(*coords)
-        coords = self.components.p(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords), self.components.counter()]
+        return Glyph([
+            Contour([
+                self.components.serif.upper_left_shoulder_serif,
+                self.components.shoulder.upper_right_shoulder,
+                self.components.glyph.p_bowl,],
+                self.components.serif.moveto_upper_left_shoulder_serif()),
+            Contour([
+                self.components.counter.counter,],
+                self.components.counter.moveto_lower_counter())])
+
+    @property
+    def r(self):
+        return Glyph([
+            Contour([
+                self.components.serif.upper_left_shoulder_serif,
+                self.components.finial.upper_finial,
+                self.components.serif.foot_serif,],
+                self.components.serif.moveto_upper_left_shoulder_serif()
+            )
+        ])
+
+    @property
+    def u(self):
+        return Glyph([
+            Contour([
+                self.components.serif.upper_left_serif,
+                self.components.counter.lower_counter,
+                self.components.serif.upper_left_serif,
+                self.components.serif.lower_right_shoulder_serif,
+                self.components.shoulder.lower_left_shoulder,],
+                self.components.serif.moveto_upper_left_shoulder_serif()),])
 
     @property
     def v(self):
-        coords = [[0,], [0, ], ]
-        coords = self.components.moveto_lower_bowl(*coords)
-        coords = self.components.lower_bowl(*coords)
-        coords = self.components.upper_left_serif(*coords)
-        coords = self.components.lower_counter(*coords)
-        coords = self.components.upper_left_serif(*coords)
-        coords[0].append(coords[0][0])
-        coords[1].append(coords[1][0])
-        return [self.zero(coords)]
+        return Glyph([
+            Contour([
+                self.components.bowl.lower_bowl,
+                self.components.serif.upper_left_serif,
+                self.components.counter.lower_counter,
+                self.components.serif.upper_left_serif,],
+                self.components.bowl.moveto_lower_bowl()),])
