@@ -9,7 +9,6 @@ class ComponentGroup(object):
         self.height = 700
         self.ascent = 200
         self.descent = 120
-        self.nf = sqrt(2) / 2
         self.s = construction.s
         self.c = construction.c
         self.x = construction.overlap
@@ -18,6 +17,7 @@ class ComponentGroup(object):
         self.th = construction.theta
         self.ph = construction.phi
         self.phs = construction.phi_steep
+        self.rhs = construction.rho_steep
         self.pi = construction.pi
         self.si = construction.sigma
         self.eta = construction.eta
@@ -25,3 +25,4 @@ class ComponentGroup(object):
         self.n = construction.n
         self.nl = construction.nl
         self.nr = construction.nr
+        self.nf = construction.nf

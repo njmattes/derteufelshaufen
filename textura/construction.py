@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import sqrt, sin, asin, tan, atan, cos, acos, degrees
+from math import sqrt, sin, asin, tan, atan, cos
+from math import pi as math_pi
 
 class Construction(object):
     def __init__(self, stem, counter, radius, x, theta):
@@ -12,10 +13,12 @@ class Construction(object):
         self.theta = theta
         self._phi = None
         self._phi_steep = None
+        self._rho_steep = None
         self._pi = None
         self.n = .5
         self.nl = .5
         self.nr = .5
+        self.nf = sqrt(2) / 2
 
     @property
     def phi(self):
@@ -65,18 +68,6 @@ class Construction(object):
         return 2 * self.s - self.c - self.sigma
 
     @property
-    def phi_steep(self):
-        if self._phi_steep is None:
-            # _phi_steep = 4 * self.r * cos(self.theta)
-            # _phi_steep /= 2 * self.sigma - (self.overlap + self.s)
-            # print 1,_phi_steep
-            # self._phi_steep = asin(_phi_steep) - self.theta
-
-            x = self.sigma - 2 * self.r * cos(self.theta)
-            self._phi_steep = atan(x * tan(self.theta / abs(self.s - x)))
-        return self._phi_steep
-
-    @property
     def offset(self):
         return max(0, self.r - self.s * tan(self.theta))
 
@@ -121,3 +112,16 @@ class Construction(object):
             _eta + (self.c * self.nl - 2 * self.r * sin(self.phi)),
             self.sigma - _eta
         ]
+
+    @property
+    def phi_steep(self):
+        if self._phi_steep is None:
+            return math_pi / 2 - (math_pi / 2 - self.phi) * self.nf ** 2
+        return self._phi_steep
+
+    @property
+    def rho_steep(self):
+        if self._rho_steep is None:
+            cn = self.c * self.nf  * .9
+            self._rho_steep = self.s + cn + 2 * self.r * sin(self.phi_steep) - self.sigma
+        return self._rho_steep
