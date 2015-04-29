@@ -7,7 +7,8 @@ from textura.glyphs import Glyphs
 
 
 class Font(object):
-    def __init__(self, stem, counter, theta, radius=None, x=None, ):
+    def __init__(self, stem, counter, theta, radius=None, x=None,
+                 n=.5, nl=.5, nr=.5, nf=.9):
         self.stem = stem
         self.counter = float(counter)
         self._theta = radians(float(theta))
@@ -15,11 +16,13 @@ class Font(object):
         self._phi = None
         self._pi = None
         self._phi_steep = None
-        self.n = .5
-        self.nl = .5
-        self.nr = .5
+        self._n = n
+        self._nl = nl
+        self._nr = nr
+        self._nf = nf
         self.construction = Construction(self.stem, self.counter, self.radius,
-                                         x, self.theta, )
+                                         x, self.theta, self.n, self.nl,
+                                         self.nr, self.nf)
         self.components = Components(self.construction)
         self.g = Glyphs(self.components)
 
@@ -67,3 +70,36 @@ class Font(object):
     @overlap.setter
     def overlap(self, value):
         self.construction.overlap = value
+
+    @property
+    def n(self):
+        return self._n
+
+    @n.setter
+    def n(self, value):
+        self._n = value
+
+    @property
+    def nl(self):
+        return self._nl
+
+    @nl.setter
+    def nl(self, value):
+        self._nl = value
+
+    @property
+    def nr(self):
+        return self._n
+
+    @nr.setter
+    def nr(self, value):
+        self._nr = value
+
+    @property
+    def nf(self):
+        return self._n
+
+    @nf.setter
+    def nf(self, value):
+        self._nf = value
+

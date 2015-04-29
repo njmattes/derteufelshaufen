@@ -5,7 +5,7 @@ from math import pi as math_pi
 
 
 class Construction(object):
-    def __init__(self, stem, counter, radius, x, theta):
+    def __init__(self, stem, counter, radius, x, theta, n, nl, nr, nf):
         self.s = stem
         self.c = counter
         self.r = radius
@@ -15,10 +15,10 @@ class Construction(object):
         self._phi_steep = None
         self._rho_steep = None
         self._pi = None
-        self.n = .5
-        self.nl = .5
-        self.nr = .5
-        self.nf = sqrt(2) / 2
+        self.n = n
+        self.nl = nl
+        self.nr = nr
+        self.nf = nf
 
     @property
     def phi(self):
