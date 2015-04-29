@@ -32,3 +32,11 @@ class Shoulder(ComponentGroup):
             [[-1, _xx],
              [1, _xx * tan(self.ph)]]
         ]))
+
+    @property
+    def upper_right_shoulder(self):
+        _xx = 2 * self.s + self.c - self.si
+        return Component(np.array([
+            [[1, _xx],
+             [-1, _xx * tan(self.ph)]],
+        ]))
