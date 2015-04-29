@@ -6,8 +6,10 @@ from textura.font import Font
 
 
 def draw(g, ax):
-    for c in g:
-        ax.plot(c[0], c[1], color='black', )
+    for contour in g.contours:
+        ax.plot(contour.xs, contour.ys, color='black', )
+    # for c in g:
+    #     ax.plot(c[0], c[1], color='black', )
 
 def draw_alpha(s, c, a, r, x):
     plt.figure(figsize=(24, 4))
@@ -31,7 +33,9 @@ def draw_alpha(s, c, a, r, x):
     ax = plt.subplot('1{}8'.format(n), sharey=ax, aspect='equal')
     draw(f.g.p, ax)
     ax = plt.subplot('1{}9'.format(n), sharey=ax, aspect='equal')
-    draw(f.g.v, ax)
+    draw(f.g.u, ax)
+    # ax = plt.subplot('1{}'.format(n), sharey=ax, aspect='equal')
+    # draw(f.g.v, ax)
 
     plt.show()
 
@@ -127,10 +131,7 @@ def draw_h():
 
     plt.show()
 
-
-
-
-if __name__ == '__main__':
+def letter():
     f = Font(100, 90, 30, 48, 15)
     glyf = f.g.b
     glyf = f.g.c
@@ -147,8 +148,12 @@ if __name__ == '__main__':
     for contour in glyf.contours:
         ax.plot(contour.xs, contour.ys, color='black', )
     plt.show()
+
+
+if __name__ == '__main__':
+    # letter()
     # draw_h()
 
-    # draw_alpha(200, 80, 20, 95, -10)
-    # draw_alpha(70, 80, 30, 34, -10)
-    # draw_alpha(20, 80, 45, 10, 15)
+    draw_alpha(200, 80, 20, 95, -10)
+    draw_alpha(70, 80, 30, 34, -10)
+    draw_alpha(20, 80, 45, 10, 15)
