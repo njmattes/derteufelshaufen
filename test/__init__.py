@@ -134,7 +134,7 @@ if __name__ == '__main__':
     f = Font(100, 90, 30, 48, 15)
     glyf = f.g.b
     glyf = f.g.c
-    glyf = f.g.d
+    # glyf = f.g.d
     # glyf = f.g.h
     # glyf = f.g.n
     # glyf = f.g.o
