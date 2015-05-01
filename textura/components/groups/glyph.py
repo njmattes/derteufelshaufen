@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from math import cos, tan, sin, atan
+from math import cos, tan, sin, atan, degrees
 import numpy as np
 from textura.components.component import Component
 from textura.components.groups import ComponentGroup
@@ -40,19 +40,24 @@ class Glyph(ComponentGroup):
         ]))
 
     @property
-    def p_bowl(self):
-        _xx = self.s + self.c - self.si
+    def e_eye(self):
+        _a = self.si + self.rhs - self.s
+        _b = (self.si + self.rhs - self.s -
+              2 * self.r * sin(self.phs) -
+              20 / cos(self.phs))
         return Component(np.array([
-            [[1, 0],
-             [0, self.si * tan(self.th)]],
-            [[-1, self.si],
-             [-1, self.si * tan(self.th)]],
-            [[-1, _xx],
-             [1, _xx * tan(self.ph)]],
-            [[1, 0],
-             [-1, self.descent - self.s * tan(self.th)]],
-            [[-1, self.s],
-             [-1, self.s * tan(self.th)]],
+            [[1, self.rhs], # SE
+             [-1, self.rhs * tan(self.phs)]],
+            [[-1, _a], # SW
+             [-1, _a / tan(self.phs)]],
+            [[1, 0], # N
+             [1, 20 / sin(self.phs)]],
+
+            [[1, _b], # NE
+             [1, _b / tan(self.phs)]],
+            [[-1, _b], # NE
+             [1, _b * tan(self.phs)]],
+
         ]))
 
     @property
@@ -66,18 +71,17 @@ class Glyph(ComponentGroup):
         ]))
 
     @property
-    def e_eye(self):
-        cn = self.c * self.nf
+    def p_bowl(self):
+        _xx = self.s + self.c - self.si
         return Component(np.array([
-            [[1, self.rhs], # SE
-             [-1, self.rhs * tan(self.phs)]],
-            [[-1, self.si + self.rhs - self.s], # SW
-             [-1, (self.si + self.rhs - self.s) * tan(self.rhs)]],
-            [[1, 0], # N
-             [1, 20 * cos(self.phs)]],
-            [[], # NE
-             []],
-            [[], # NW
-             []],
-
+            [[1, 0],
+             [0, self.si * tan(self.th)]],
+            [[-1, self.si],
+             [-1, self.si * tan(self.th)]],
+            [[-1, _xx],
+             [1, _xx * tan(self.ph)]],
+            [[1, 0],
+             [-1, self.descent - self.s * tan(self.th)]],
+            [[-1, self.s],
+             [-1, self.s * tan(self.th)]],
         ]))

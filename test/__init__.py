@@ -23,7 +23,7 @@ def draw_alpha(s, c, a, r, x):
     ax = plt.subplot('1{}2'.format(n), sharey=ax, aspect='equal')
     draw(f.g.c, ax)
     ax = plt.subplot('1{}3'.format(n), sharey=ax, aspect='equal')
-    draw(f.g.d, ax)
+    draw(f.g.e, ax)
     ax = plt.subplot('1{}4'.format(n), sharey=ax, aspect='equal')
     draw(f.g.h, ax)
     ax = plt.subplot('1{}5'.format(n), sharey=ax, aspect='equal')
