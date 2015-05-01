@@ -55,6 +55,18 @@ class Glyphs(object):
             self.components.bowl.moveto_lower_bowl())])
 
     @property
+    def f(self):
+        return Glyph([Contour([
+            self.components.serif.foot_serif,
+            # self.components.crossbar.left_crossbar,
+            self.components.extender.lineto_ascender,
+            self.components.extender.lineto_ascent_apex,
+            # self.components.extender.ascender,
+            self.components.finial.upper_finial,],
+            # self.components.crossbar.right_crossbar,],
+            self.components.serif.moveto_foot_serif())])
+
+    @property
     def h(self):
         return Glyph([Contour([
             self.components.serif.foot_serif,

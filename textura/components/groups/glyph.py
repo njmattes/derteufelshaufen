@@ -64,3 +64,20 @@ class Glyph(ComponentGroup):
             [[1, self.si - self.s],
              [1, (self.si - self.s) * tan(self.th)]]
         ]))
+
+    @property
+    def e_eye(self):
+        cn = self.c * self.nf
+        return Component(np.array([
+            [[1, self.rhs], # SE
+             [-1, self.rhs * tan(self.phs)]],
+            [[-1, self.si + self.rhs - self.s], # SW
+             [-1, (self.si + self.rhs - self.s) * tan(self.rhs)]],
+            [[1, 0], # N
+             [1, 20 * cos(self.phs)]],
+            [[], # NE
+             []],
+            [[], # NW
+             []],
+
+        ]))

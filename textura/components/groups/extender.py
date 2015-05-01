@@ -21,6 +21,15 @@ class Extender(ComponentGroup):
         ]))
 
     @property
+    def lineto_ascent_apex(self):
+        return Component(np.array([
+            [[1, 0],
+             [0, self.height + self.ascent - self.si * tan(self.th)]],
+            [[1, self.si],
+             [1, self.si * tan(self.th)]],
+        ]))
+
+    @property
     def ascender(self):
         return Component([
             [[1, 0],
