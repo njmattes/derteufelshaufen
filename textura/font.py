@@ -89,7 +89,7 @@ class Font(object):
 
     @property
     def nr(self):
-        return self._n
+        return self._nr
 
     @nr.setter
     def nr(self, value):
@@ -97,7 +97,7 @@ class Font(object):
 
     @property
     def nf(self):
-        return self._n
+        return self._nf
 
     @nf.setter
     def nf(self, value):
