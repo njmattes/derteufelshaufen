@@ -116,12 +116,13 @@ class Construction(object):
     @property
     def phi_steep(self):
         if self._phi_steep is None:
-            return math_pi / 2 - (math_pi / 2 - self.phi) * self.nf ** 2
+            self._phi_steep = math_pi / 2 - (math_pi / 2 - self.phi) * self.nf ** 2
+            self._phi_steep = self.phi + (math_pi / 2 - self.phi) * self.phi / (math_pi / 2)
         return self._phi_steep
 
     @property
     def rho_steep(self):
         if self._rho_steep is None:
-            cn = self.c * self.nf  * .9
+            cn = self.c * self.nf
             self._rho_steep = self.s + cn + 2 * self.r * sin(self.phi_steep) - self.sigma
         return self._rho_steep
