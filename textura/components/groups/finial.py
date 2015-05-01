@@ -10,6 +10,15 @@ class Finial(ComponentGroup):
         super(Finial, self).__init__(*args)
 
     @property
+    def finial_scale_factor(self):
+        e = ((sin(self.phs) * cos(self.phs) -
+              sin(self.ph / 2) * cos(self.ph / 2)) /
+             2 * cos(self.ph))
+        r = self.r * 2 * e
+        return (self.si + self.rhs - r) / (self.si + self.rhs)
+
+
+    @property
     def upper_finial(self):
         """ /`\
              \/
@@ -32,13 +41,14 @@ class Finial(ComponentGroup):
 
     @property
     def lower_finial(self):
-        _xx = self.rhs + self.si - 2 * self.r * sin(self.ph / 2)
+        a = (self.si + self.rhs) * self.finial_scale_factor
+        _xx = a - 2 * self.r * sin(self.ph / 2)
         return Component(np.array([
             [[1, 0],
-             [0, (self.si + self.rhs - self.s) * tan(self.ph / 2) + 2 *
+             [0, (a - self.s) * tan(self.ph / 2) + 2 *
               self.r * cos(self.ph / 2)]],
-            [[1, self.si + self.rhs - self.s],
-             [-1, (self.si + self.rhs - self.s) * tan(self.ph / 2)]],
+            [[1, a - self.s],
+             [-1, (a - self.s) * tan(self.ph / 2)]],
             [[-1, 2 * self.r * sin(self.ph / 2)],
              [-1, 2 * self.r * cos(self.ph / 2)]],
             [[-1, _xx],
