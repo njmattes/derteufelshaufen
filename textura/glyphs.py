@@ -156,3 +156,16 @@ class Glyphs(object):
                 self.components.counter.lower_counter,
                 self.components.serif.upper_left_serif,],
                 self.components.bowl.moveto_lower_bowl()),])
+
+    @property
+    def w(self):
+        return Glyph([
+            Contour([
+                self.components.bowl.lower_bowl,
+                self.components.glyph.w_bowl,
+                self.components.serif.upper_left_serif,
+                self.components.counter.lower_counter,
+                self.components.serif.upper_left_serif,
+                self.components.counter.lower_counter,
+                self.components.serif.upper_left_serif,],
+                self.components.bowl.moveto_lower_bowl()),])

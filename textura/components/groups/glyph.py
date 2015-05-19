@@ -85,3 +85,14 @@ class Glyph(ComponentGroup):
             [[-1, self.s],
              [-1, self.s * tan(self.th)]],
         ]))
+
+    @property
+    def w_bowl(self):
+        _w = (3 * self.s + 2 * self.c) - (self.si + self.rh)
+        _xx = _w / (1 + tan(self.th) / tan(self.ph))
+        return Component([
+            [[-1, _xx],
+             [-1, _xx * tan(self.th)]],
+            [[-1, _w - _xx],
+              [1, (_w - _xx) * tan(self.ph)]],
+        ])
