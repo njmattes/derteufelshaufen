@@ -6,6 +6,7 @@ from textura.components.groups.crossbar import Crossbar
 from textura.components.groups.extender import Extender
 from textura.components.groups.finial import Finial
 from textura.components.groups.glyph import Glyph
+from textura.components.groups.mark import Mark
 from textura.components.groups.serif import Serif
 from textura.components.groups.shoulder import Shoulder
 
@@ -20,3 +21,4 @@ class Components(object):
         self.finial = Finial(construction)
         self.shoulder = Shoulder(construction)
         self.glyph = Glyph(construction)
+        self.mark = Mark(construction)
