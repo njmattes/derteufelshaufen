@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import sqrt, sin, asin, tan, cos
+from math import sin, tan, atan, cos
 from math import pi as math_pi
 
 
@@ -27,10 +27,8 @@ class Construction(object):
         :rtype: float
         """
         if self._phi is None:
-            h = self.offset + self.overlap * tan(self.theta)
-            w = 2 * self.s + self.c - self.overlap - self.r
-            self._phi = asin(self.r / sqrt(h ** 2 + w ** 2)) + tan(h / w)
-
+            self._phi = atan(self.s * tan(self.theta) / (self.s +
+                                                         self.c - self.r))
         return self._phi
 
     @property
@@ -82,21 +80,20 @@ class Construction(object):
         :rtype:
         """
         if self._overlap is None:
-            self.overlap = 0
+            self._overlap = self.s - (self.r / (cos(self.phi) * tan(self.theta)
+                                                + sin(self.phi)))
         if self._overlap < -(self.offset + self.r) / tan(self.theta):
-            raise Exception('Invalid overlap. Minimum overlap = -(offset + radius) / tan(theta).')
+            raise Exception('''Invalid overlap.
+Minimum overlap = -(offset + radius) / tan(theta).''')
         if self._overlap > self.s:
             raise Exception('Invalid overlap. Maximum overlap = stem.')
         return self._overlap
 
-    @overlap.setter
-    def overlap(self, value):
-        self._overlap = value
-
     @property
     def pinch_y(self):
         y = (self.offset + self.r * cos(self.phi))
-        y -= tan(self.phi) * ((self.s + self.c) - (self.r * (1 + sin(self.phi))))
+        y -= tan(self.phi) * ((self.s + self.c) -
+                              (self.r * (1 + sin(self.phi))))
         return y
 
     @property
@@ -116,13 +113,16 @@ class Construction(object):
     @property
     def phi_steep(self):
         if self._phi_steep is None:
-            self._phi_steep = math_pi / 2 - (math_pi / 2 - self.phi) * self.nf ** 2
-            self._phi_steep = self.phi + (math_pi / 2 - self.phi) * self.phi / (math_pi / 2)
+            self._phi_steep = math_pi / 2 - (math_pi / 2 -
+                                             self.phi) * self.nf ** 2
+            self._phi_steep = self.phi + (math_pi / 2 -
+                                          self.phi) * self.phi / (math_pi / 2)
         return self._phi_steep
 
     @property
     def rho_steep(self):
         if self._rho_steep is None:
             cn = self.c * self.nf
-            self._rho_steep = self.s + cn + 2 * self.r * sin(self.phi_steep) - self.sigma
+            self._rho_steep = self.s + cn + \
+                              2 * self.r * sin(self.phi_steep) - self.sigma
         return self._rho_steep

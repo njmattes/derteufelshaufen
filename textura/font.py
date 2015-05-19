@@ -60,18 +60,6 @@ class Font(object):
         self._phi = None
 
     @property
-    def overlap(self):
-        """Overlap coefficient. Defaults to 0.
-        :return:
-        :rtype:
-        """
-        return self.construction.overlap
-
-    @overlap.setter
-    def overlap(self, value):
-        self.construction.overlap = value
-
-    @property
     def n(self):
         return self._n
 
