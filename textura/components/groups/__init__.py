@@ -14,6 +14,7 @@ class ComponentGroup(object):
         self.r = construction.r
         self.th = construction.theta
         self.ph = construction.phi
+        self.rh = construction.rho
         self.phs = construction.phi_steep
         self.rhs = construction.rho_steep
         self.pi = construction.pi

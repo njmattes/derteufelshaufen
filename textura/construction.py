@@ -65,7 +65,7 @@ class Construction(object):
 
     @property
     def rho(self):
-        return 2 * self.s - self.c - self.sigma
+        return 2 * self.s + self.c - self.sigma
 
     @property
     def offset(self):
