@@ -22,12 +22,6 @@ class Glyphs(object):
     def __init__(self, components):
         self.components = components
 
-    def zero(self, g):
-        g = np.array(g)
-        # g[0][:] -= min(g[0][:])
-        # g[1][:] -= min(g[1][:])
-        return g
-
     @property
     def b(self):
         return Glyph([Contour([
