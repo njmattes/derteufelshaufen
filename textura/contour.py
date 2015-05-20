@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+from __future__ import division
 
 
 class Contour(object):
@@ -43,8 +44,65 @@ class Contour(object):
 
     @property
     def xs(self):
-        return [x[0] for x in self.coords]
+        return self.coords[:,0]
 
     @property
     def ys(self):
-        return [x[1] for x in self.coords]
+        return self.coords[:,1]
+
+    @property
+    def area(self):
+        xs = self.coords[:,0]
+        ys = self.coords[:,1]
+        a = 0
+        for i in range(len(self.coords)):
+            a += xs[i-1] * ys[i] - xs[i] * ys[i-1]
+        return a / 2
+
+    @property
+    def centroid(self):
+        xs = self.coords[:,0]
+        ys = self.coords[:,1]
+        xy = np.array([0, 0])
+        for i in range(len(self.coords)):
+            d = xs[i-1] * ys[i] - xs[i] * ys[i-1]
+            xy += np.array([(self.xs[i-1] + self.xs[i]) * d,
+                            (self.ys[i-1] + self.ys[i]) * d])
+        return 1 / 6 * xy / self.area
+
+    @property
+    def inertia_x(self):
+        coords = self.coords - self.centroid
+        xs = coords[:,0]
+        ys = coords[:,1]
+        ix = 0
+        for i in range(len(self.coords)):
+            d = xs[i-1] * ys[i] - xs[i] * ys[i-1]
+            ix += (xs[i-1] ** 2 + xs[i] * xs[i-1] + xs[i] ** 2) * d
+        return 1 / 12 * ix / self.area
+
+    @property
+    def inertia_y(self):
+        coords = self.coords - self.centroid
+        xs = coords[:,0]
+        ys = coords[:,1]
+        iy = 0
+        for i in range(len(self.coords)):
+            d = xs[i-1] * ys[i] - xs[i] * ys[i-1]
+            iy += (ys[i-1] ** 2 + ys[i] * ys[i-1] + ys[i] ** 2) * d
+        return 1 / 12 * iy / self.area
+
+    @property
+    def inertia_xy(self):
+        coords = self.coords - self.centroid
+        xs = coords[:,0]
+        ys = coords[:,1]
+        ixy = 0
+        for i in range(len(self.coords)):
+            d = xs[i-1] * ys[i] - xs[i] * ys[i-1]
+            ixy += (2 * self.xs[i-1] * self.ys[i-1] +
+                    self.xs[i] * self.ys[i-1] +
+                    self.ys[i] * self.xs[i-1] +
+                    2 * self.xs[i] * self.ys[i]) * d
+        return 1 / 24 * ixy / self.area
+
