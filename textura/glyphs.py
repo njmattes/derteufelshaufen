@@ -23,6 +23,11 @@ class Glyphs(object):
         self.components = components
 
     @property
+    def a(self):
+        # TODO: Add a
+        return None
+
+    @property
     def b(self):
         return Glyph([Contour([
             self.components.bowl.lower_bowl,
@@ -58,6 +63,7 @@ class Glyphs(object):
 
     @property
     def f(self):
+        # TODO: Fix f
         return Glyph([Contour([
             self.components.serif.foot_serif,
             # self.components.crossbar.left_crossbar,
@@ -67,6 +73,11 @@ class Glyphs(object):
             self.components.finial.upper_finial,],
             # self.components.crossbar.right_crossbar,],
             self.components.serif.moveto_foot_serif())])
+
+    @property
+    def g(self):
+        # TODO: Add g
+        return None
 
     @property
     def h(self):
@@ -81,6 +92,7 @@ class Glyphs(object):
 
     @property
     def i(self):
+        # TODO: Better dot placement on i (and j)
         return Glyph([Contour([
             self.components.serif.foot_serif,
             self.components.serif.upper_left_serif,
@@ -88,6 +100,16 @@ class Glyphs(object):
         Contour([
             self.components.mark.tittle,
         ], self.components.mark.moveto_tittle())])
+
+    @property
+    def j(self):
+        # TODO: Add j`
+        return None
+
+    @property
+    def k(self):
+        # TODO: Add k
+        return None
 
     @property
     def l(self):
@@ -143,6 +165,11 @@ class Glyphs(object):
                 self.components.counter.moveto_lower_counter())])
 
     @property
+    def q(self):
+        # TODO: Add q
+        return None
+
+    @property
     def r(self):
         return Glyph([
             Contour([
@@ -152,6 +179,16 @@ class Glyphs(object):
                 self.components.serif.moveto_upper_left_shoulder_serif()
             )
         ])
+
+    @property
+    def s(self):
+        # TODO: Add s
+        return None
+
+    @property
+    def t(self):
+        # TODO: Add t
+        return None
 
     @property
     def u(self):
@@ -186,3 +223,18 @@ class Glyphs(object):
                 self.components.counter.lower_counter,
                 self.components.serif.upper_left_serif,],
                 self.components.bowl.moveto_lower_bowl()),])
+
+    @property
+    def x(self):
+        # TODO: Add x
+        return None
+
+    @property
+    def y(self):
+        # TODO: Add y
+        return None
+
+    @property
+    def z(self):
+        # TODO: Add z
+        return None
