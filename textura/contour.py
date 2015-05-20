@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import numpy as np
 
 
 class Contour(object):
-    def __init__(self, components, start):
+    def __init__(self, components, start, ccw=True):
         self._components = components
         self._start = start
+        self.ccw = ccw
 
     @property
     def components(self):
@@ -35,7 +37,9 @@ class Contour(object):
                     coords[-1][0] * abs(c[0][0]) + signs[0] * c[0][1],
                     coords[-1][1] * abs(c[1][0]) + signs[1] * c[1][1],])
         coords.append(coords[0])
-        return coords
+        if self.ccw:
+            coords.reverse()
+        return np.array(coords)
 
     @property
     def xs(self):
