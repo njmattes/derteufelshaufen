@@ -97,6 +97,19 @@ class Glyphs(object):
         ], self.components.serif.moveto_foot_serif())])
 
     @property
+    def m(self):
+        return Glyph([Contour([
+            self.components.serif.foot_serif,
+            self.components.serif.upper_left_shoulder_serif,
+            self.components.glyph.m_shoulder,
+            self.components.shoulder.upper_right_shoulder,
+            self.components.serif.foot_serif,
+            self.components.counter.upper_counter,
+            self.components.serif.foot_serif,
+            self.components.counter.upper_counter,],
+            self.components.serif.moveto_foot_serif())])
+
+    @property
     def n(self):
         return Glyph([Contour([
             self.components.serif.foot_serif,
