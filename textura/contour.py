@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import numpy as np
 from __future__ import division
+import numpy as np
 
 
 class Contour(object):
