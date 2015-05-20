@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from math import cos, tan, sin, atan, degrees
+from math import pi as math_pi
 import numpy as np
 from textura.components.component import Component
 from textura.components.groups import ComponentGroup
@@ -11,8 +12,8 @@ class Glyph(ComponentGroup):
 
     @property
     def d_ascent(self):
-        ang = atan((2 * self.s + self.c) / self.ascent)
-        _xx = self.s + self.c + 2 * self.r * cos(ang)
+        ang = math_pi / 2 - atan((2 * self.s + self.c) / self.ascent)
+        _xx = self.s + self.c + 2 * self.r * sin(ang)
         return Component(np.array([
             [[1, 0],
              [0, self.height + self.ascent - _xx / tan(ang) -
@@ -29,8 +30,8 @@ class Glyph(ComponentGroup):
 
     @property
     def d_bowl(self):
-        ang = atan((2 * self.s + self.c) / self.ascent)
-        _xx = self.s + self.c + 2 * self.r * cos(ang)
+        ang = math_pi / 2 - atan((2 * self.s + self.c) / self.ascent)
+        _xx = self.s + self.c + 2 * self.r * sin(ang)
         return Component(np.array([
             [[1, 0],
              [0, self.height + self.ascent - 2 * self.r * sin(ang) -
