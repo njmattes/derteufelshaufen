@@ -132,7 +132,7 @@ def draw_h():
     plt.show()
 
 def letter():
-    f = Font(100, 90, 30, 48, 15)
+    f = Font(100, 90, 30, 48)
     glyf = f.g.b
     glyf = f.g.c
     glyf = f.g.d
@@ -154,9 +154,25 @@ def letter():
     for c in glyf.contours: print(min(c.ys))
     plt.show()
 
+def all_letters(s, c, t, r, o=None):
+    f = Font(s, c, t, r, o)
+    glyfs = [getattr(f.g, letter) for letter in 'bcdehilmnopruvw']
+    plt.figure(figsize=(24, 8))
+    ax = plt.subplot(111, aspect='equal')
+    x = 20
+    for glyf in glyfs:
+        w = (max([max(contour.xs) for contour in glyf.contours]) -
+             min([min(contour.xs) for contour in glyf.contours])) + 20
+        for contour in glyf.contours:
+            ax.plot(contour.xs + x, contour.ys, color='black', )
+        x += w
+    plt.show()
+
 
 if __name__ == '__main__':
-    letter()
+    # all_letters(100, 90, 30, 48)
+    all_letters(20, 100, 25, 10, 15)
+    # letter()
     # draw_h()
 
     # draw_alpha(200, 80, 20, 95, -10)
