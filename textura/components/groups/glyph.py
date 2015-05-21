@@ -85,7 +85,6 @@ class Glyph(ComponentGroup):
         e = 2 * self.r * sin(self.ph) + self.eta[0] + self.eta[1] - self.c * self.nl
         _w = (3 * self.s + 2 * self.c) - e - (2 * self.s + self.c - self.si)
         _xx = _w / (1 + tan(self.th) / tan(self.ph))
-
         return Component(np.array([
             [[-1, _xx],
              [-1, _xx * tan(self.th)]],

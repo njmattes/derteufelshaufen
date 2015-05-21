@@ -102,12 +102,10 @@ Minimum overlap = -(offset + radius) / tan(theta).''')
         :return:
         """
         _eta = self.sigma + (self.c * self.nl - 2 * self.r * sin(self.phi))
-        _eta *= -tan(self.phi)
-        _eta /= (tan(self.phi) + tan(self.theta))
-        _eta += self.sigma
+        _eta0 = _eta * tan(self.theta) / (tan(self.theta) + tan(self.phi))
         return [
-            _eta + (self.c * self.nl - 2 * self.r * sin(self.phi)),
-            self.sigma - _eta
+            _eta0,
+            _eta - _eta0
         ]
 
     @property
