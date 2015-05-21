@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from math import sin, tan, atan, cos
+from math import sin, tan, atan, cos, floor, sqrt
 from math import pi as math_pi
 
 
@@ -124,3 +124,7 @@ Minimum overlap = -(offset + radius) / tan(theta).''')
             self._rho_steep = self.s + cn + \
                               2 * self.r * sin(self.phi_steep) - self.sigma
         return self._rho_steep
+
+    @property
+    def hairline(self):
+        return 20 if self.s > 25 else floor(self.s * sqrt(2) / 2)
