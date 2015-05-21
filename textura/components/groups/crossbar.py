@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from math import tan, cos
+from math import cos
 from math import pi as math_pi
-import numpy as np
 from textura.components.component import Component
 from textura.components.groups import ComponentGroup
 

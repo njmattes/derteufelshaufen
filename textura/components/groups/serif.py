@@ -11,7 +11,8 @@ class Serif(ComponentGroup):
 
     def moveto_foot_serif(self):
         return [0,
-                (self.s + self.c * self.nr - 2 * self.r * sin(self.ph)) * tan(self.ph)]
+                (self.s + self.c * self.nr - 2 * self.r *
+                 sin(self.ph)) * tan(self.ph)]
 
     def moveto_upper_left_shoulder_serif(self):
         return [self.si,
@@ -19,8 +20,8 @@ class Serif(ComponentGroup):
 
     def moveto_upper_serif(self):
         return [self.s,
-                self.height - (self.s + self.c * self.nr - 2 * self.r * sin(self.ph)) * tan(self.ph)]
-                # self.height - (self.s + self.c * self.nl - 2 * self.r * sin(self.ph))]
+                self.height - (self.s + self.c * self.nr - 2 * self.r *
+                               sin(self.ph)) * tan(self.ph)]
 
     @property
     def upper_left_serif(self):
@@ -28,7 +29,8 @@ class Serif(ComponentGroup):
         _xx = self.s + cn - 2 * self.r * sin(self.ph)
         return Component(np.array([
             [[1, 0],
-             [0, self.height - (self.s + self.c * self.nr - 2 * self.r * sin(self.ph)) * tan(self.ph)]],
+             [0, self.height - (self.s + self.c * self.nr - 2 * self.r *
+                                sin(self.ph)) * tan(self.ph)]],
             [[-1, _xx],
              [1, _xx * tan(self.ph)]],
             [[-1, 2 * self.r * sin(self.ph)],
@@ -52,7 +54,8 @@ class Serif(ComponentGroup):
         _xx = (self.s + cn) - 2 * self.r * sin(self.ph)
         return Component(np.array([
             [[1, 0],
-             [0, (self.s + self.c * self.nr - 2 * self.r * sin(self.ph)) * tan(self.ph)]],
+             [0, (self.s + self.c * self.nr - 2 * self.r *
+                  sin(self.ph)) * tan(self.ph)]],
             [[1, _xx],
              [-1, _xx * tan(self.ph)]],
             [[1, 2 * self.r * sin(self.ph)],
@@ -88,6 +91,4 @@ class Serif(ComponentGroup):
              [1, 2 * self.r * cos(self.ph)]],
             [[-1, cn],
              [1, cn * tan(self.ph)]],
-            # [[1, 0],
-            #  [0, 2 * self.r * cos(self.ph) + cn * tan(self.ph)]],
         ]))

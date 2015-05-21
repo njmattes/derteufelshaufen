@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from math import cos, tan, sin, atan, degrees
-from math import pi as math_pi
+from math import cos, tan, sin, atan
 import numpy as np
 from textura.components.component import Component
 from textura.components.groups import ComponentGroup
@@ -13,7 +12,8 @@ class Glyph(ComponentGroup):
     def moveto_e_eye_counter(self):
         _a = self.si + self.rhs - self.s  # width of eye
         return [self.s,
-                self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) + self.hairline / sin(self.phs)]
+                self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) +
+                self.hairline / sin(self.phs)]
 
     @property
     def d_ascent(self):
@@ -47,7 +47,8 @@ class Glyph(ComponentGroup):
         _a = self.si + self.rhs - self.s  # width of eye
         return Component(np.array([
             [[1, 0],
-             [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs))]],
+             [0, self.height - (self.rhs * tan(self.phs) +
+                                _a / tan(self.phs))]],
             [[1, _a],
              [1, _a / tan(self.phs)]],
             [[-1, self.rhs],
@@ -57,10 +58,12 @@ class Glyph(ComponentGroup):
     @property
     def e_eye_counter(self):
         _a = self.si + self.rhs - self.s  # width of eye
-        _b = (_a - 2 * self.r * sin(self.phs)) - self.hairline * cos(self.phs)  # width of eye's counter
+        _b = (_a - 2 * self.r * sin(self.phs)) - \
+             self.hairline * cos(self.phs)  # width of eye's counter
         return Component(np.array([
             [[0, self.s],
-             [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) + self.hairline / sin(self.phs)]],
+             [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) +
+              self.hairline / sin(self.phs)]],
             [[1, 0],
              [1, _b / tan(self.phs) + _b * tan(self.phs)]],
             [[1, _b],
@@ -77,7 +80,8 @@ class Glyph(ComponentGroup):
 
     @property
     def m_shoulder(self):
-        e = 2 * self.r * sin(self.ph) + self.eta[0] + self.eta[1] - self.c * self.nl
+        e = 2 * self.r * sin(self.ph) + self.eta[0] + self.eta[1] - \
+            self.c * self.nl
         _w = (3 * self.s + 2 * self.c) - e - (2 * self.s + self.c - self.si)
         _xx = _w / (1 + tan(self.th) / tan(self.ph))
         return Component(np.array([

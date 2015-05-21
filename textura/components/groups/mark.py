@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from math import tan, cos, sin
-from math import pi as math_pi
 import numpy as np
 from textura.components.component import Component
 from textura.components.groups import ComponentGroup
@@ -13,7 +12,8 @@ class Mark(ComponentGroup):
 
     def moveto_tittle(self):
         h = self.s * tan(self.ph) + 2 * self.r * cos(self.ph)
-        y = self.height + 10 if h >= self.ascent else self.height + self.ascent - h
+        y = self.height + 10 if h >= self.ascent else (self.height +
+                                                       self.ascent - h)
         return [self.s - (self.c * self.nl) / 2, y]
 
     @property
