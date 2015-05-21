@@ -25,3 +25,4 @@ class ComponentGroup(object):
         self.nl = construction.nl
         self.nr = construction.nr
         self.nf = construction.nf
+        self.hairline = construction.hairline

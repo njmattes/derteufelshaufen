@@ -12,10 +12,8 @@ class Glyph(ComponentGroup):
 
     def moveto_e_eye_counter(self):
         _a = self.si + self.rhs - self.s  # width of eye
-        _b = (_a - 2 * self.r * sin(self.phs) -
-              20 / cos(self.phs))
         return [self.s,
-                self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) + 20 / sin(self.phs)]
+                self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) + self.hairline / sin(self.phs)]
 
     @property
     def d_ascent(self):
@@ -47,8 +45,6 @@ class Glyph(ComponentGroup):
     @property
     def e_eye(self):
         _a = self.si + self.rhs - self.s  # width of eye
-        _b = (_a - 2 * self.r * sin(self.phs) -
-              20 / cos(self.phs))
         return Component(np.array([
             [[1, 0],
              [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs))]],
@@ -61,11 +57,10 @@ class Glyph(ComponentGroup):
     @property
     def e_eye_counter(self):
         _a = self.si + self.rhs - self.s  # width of eye
-        _b = (_a - 2 * self.r * sin(self.phs) -
-              20 / cos(self.phs))
+        _b = (_a - 2 * self.r * sin(self.phs)) - self.hairline * cos(self.phs)  # width of eye's counter
         return Component(np.array([
             [[0, self.s],
-             [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) + 20 / sin(self.phs)]],
+             [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) + self.hairline / sin(self.phs)]],
             [[1, 0],
              [1, _b / tan(self.phs) + _b * tan(self.phs)]],
             [[1, _b],
