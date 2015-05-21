@@ -31,18 +31,18 @@ class Glyphs(object):
     def b(self):
         return Glyph([Contour([
             self.components.bowl.lower_bowl,
-            self.components.extender.ascender,
+            self.components.serif.upper_left_serif,
             self.components.counter.lower_counter,
-            self.components.serif.upper_left_serif,],
+            self.components.extender.ascender,],
             self.components.bowl.moveto_lower_bowl())])
 
     @property
     def c(self):
         return Glyph([Contour([
-            self.components.bowl.lineto_upper_bowl_apex,
+            self.components.finial.lower_finial,
             self.components.finial.upper_finial,
-            self.components.finial.lower_finial,],
-            self.components.bowl.moveto_upper_bowl())])
+            self.components.bowl.linefrom_upper_bowl_apex,],
+            self.components.finial.moveto_lower_finial())])
 
     @property
     def d(self):
@@ -55,11 +55,16 @@ class Glyphs(object):
 
     @property
     def e(self):
-        return Glyph([Contour([
-            self.components.bowl.lineto_upper_bowl_apex,
-            self.components.glyph.e_eye,
-            self.components.finial.lower_finial,],
-            self.components.bowl.moveto_upper_bowl())])
+        return Glyph([
+            Contour([
+                self.components.bowl.linefrom_upper_bowl_apex,
+                self.components.finial.lower_finial,
+                self.components.glyph.e_eye,],
+                self.components.bowl.moveto_upper_bowl_apex()),
+            Contour([
+                self.components.glyph.e_eye_counter,],
+                self.components.glyph.moveto_e_eye_counter(),
+                ccw=False)])
 
     @property
     def f(self):
@@ -83,11 +88,11 @@ class Glyphs(object):
     def h(self):
         return Glyph([Contour([
             self.components.serif.foot_serif,
-            self.components.extender.ascender,
-            self.components.glyph.h_shoulder,
-            self.components.shoulder.upper_right_shoulder,
+            self.components.counter.upper_counter,
             self.components.serif.foot_serif,
-            self.components.counter.upper_counter,],
+            self.components.shoulder.upper_right_shoulder,
+            self.components.glyph.h_shoulder,
+            self.components.extender.ascender,],
             self.components.serif.moveto_foot_serif())])
 
     @property
@@ -122,23 +127,23 @@ class Glyphs(object):
     def m(self):
         return Glyph([Contour([
             self.components.serif.foot_serif,
-            self.components.serif.upper_left_shoulder_serif,
-            self.components.glyph.m_shoulder,
-            self.components.shoulder.upper_right_shoulder,
+            self.components.counter.upper_counter,
             self.components.serif.foot_serif,
             self.components.counter.upper_counter,
             self.components.serif.foot_serif,
-            self.components.counter.upper_counter,],
+            self.components.shoulder.upper_right_shoulder,
+            self.components.glyph.m_shoulder,
+            self.components.serif.upper_left_shoulder_serif,],
             self.components.serif.moveto_foot_serif())])
 
     @property
     def n(self):
         return Glyph([Contour([
             self.components.serif.foot_serif,
-            self.components.serif.upper_left_shoulder_serif,
-            self.components.shoulder.upper_right_shoulder,
+            self.components.counter.upper_counter,
             self.components.serif.foot_serif,
-            self.components.counter.upper_counter,],
+            self.components.shoulder.upper_right_shoulder,
+            self.components.serif.upper_left_shoulder_serif,],
             self.components.serif.moveto_foot_serif())])
 
     @property
@@ -150,19 +155,22 @@ class Glyphs(object):
                 self.components.bowl.moveto_lower_bowl()),
             Contour([
                 self.components.counter.counter,],
-                self.components.counter.moveto_lower_counter())])
+                self.components.counter.moveto_lower_counter(),
+                ccw=False)])
 
     @property
     def p(self):
         return Glyph([
             Contour([
                 self.components.serif.upper_left_shoulder_serif,
-                self.components.shoulder.upper_right_shoulder,
-                self.components.glyph.p_bowl,],
+                self.components.extender.descender,
+                self.components.glyph.p_bowl,
+                self.components.shoulder.upper_right_shoulder,],
                 self.components.serif.moveto_upper_left_shoulder_serif()),
             Contour([
                 self.components.counter.counter,],
-                self.components.counter.moveto_lower_counter())])
+                self.components.counter.moveto_lower_counter(),
+                ccw=False)])
 
     @property
     def q(self):
@@ -174,8 +182,8 @@ class Glyphs(object):
         return Glyph([
             Contour([
                 self.components.serif.upper_left_shoulder_serif,
-                self.components.finial.upper_finial,
-                self.components.serif.foot_serif,],
+                self.components.serif.foot_serif,
+                self.components.finial.upper_finial,],
                 self.components.serif.moveto_upper_left_shoulder_serif()
             )
         ])
@@ -195,11 +203,11 @@ class Glyphs(object):
         return Glyph([
             Contour([
                 self.components.serif.upper_left_serif,
-                self.components.counter.lower_counter,
-                self.components.serif.upper_left_serif,
+                self.components.shoulder.lower_left_shoulder,
                 self.components.serif.lower_right_shoulder_serif,
-                self.components.shoulder.lower_left_shoulder,],
-                self.components.serif.moveto_upper_left_shoulder_serif()),])
+                self.components.serif.upper_left_serif,
+                self.components.counter.lower_counter,],
+                self.components.serif.moveto_upper_serif()),])
 
     @property
     def v(self):
@@ -215,14 +223,13 @@ class Glyphs(object):
     def w(self):
         return Glyph([
             Contour([
-                self.components.bowl.lower_bowl,
+                self.components.serif.upper_left_serif,
                 self.components.glyph.w_bowl,
                 self.components.serif.upper_left_serif,
                 self.components.counter.lower_counter,
                 self.components.serif.upper_left_serif,
-                self.components.counter.lower_counter,
-                self.components.serif.upper_left_serif,],
-                self.components.bowl.moveto_lower_bowl()),])
+                self.components.counter.lower_counter,],
+                self.components.serif.moveto_upper_serif()),])
 
     @property
     def x(self):

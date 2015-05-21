@@ -14,9 +14,13 @@ class Serif(ComponentGroup):
                 (self.s + self.c * self.nr - 2 * self.r * sin(self.ph)) * tan(self.ph)]
 
     def moveto_upper_left_shoulder_serif(self):
-        return [0,
-                self.height - 2 * self.r * cos(self.ph) -
-                self.c * self.nl * tan(self.ph)]
+        return [self.si,
+                self.height]
+
+    def moveto_upper_serif(self):
+        return [self.s,
+                self.height - (self.s + self.c * self.nr - 2 * self.r * sin(self.ph)) * tan(self.ph)]
+                # self.height - (self.s + self.c * self.nl - 2 * self.r * sin(self.ph))]
 
     @property
     def upper_left_serif(self):
@@ -78,8 +82,8 @@ class Serif(ComponentGroup):
         return Component(np.array([
             [[1, self.eta[1]],
              [1, self.eta[1] * tan(self.th)]],
-            [[-1, self.eta[0]],
-             [ 1, self.eta[0] * tan(self.ph)]],
+            [[1, self.eta[0]],
+             [0, 0]],
             [[1, 2 * self.r * sin(self.ph)],
              [1, 2 * self.r * cos(self.ph)]],
             [[-1, cn],

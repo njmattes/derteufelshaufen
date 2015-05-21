@@ -38,7 +38,7 @@ class Contour(object):
                     coords[-1][0] * abs(c[0][0]) + signs[0] * c[0][1],
                     coords[-1][1] * abs(c[1][0]) + signs[1] * c[1][1],])
         coords.append(coords[0])
-        if self.ccw:
+        if not self.ccw:
             coords.reverse()
         return np.array(coords)
 

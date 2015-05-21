@@ -135,25 +135,30 @@ def letter():
     f = Font(100, 90, 30, 48, 15)
     glyf = f.g.b
     glyf = f.g.c
-    # glyf = f.g.d
-    # glyf = f.g.h
-    # glyf = f.g.n
-    # glyf = f.g.o
-    # glyf = f.g.p
-    # glyf = f.g.r
-    # glyf = f.g.u
-    # glyf = f.g.v
-    plt.figure(figsize=(2, 2))
+    glyf = f.g.d
+    glyf = f.g.e
+    glyf = f.g.h
+    glyf = f.g.i
+    glyf = f.g.m
+    glyf = f.g.n
+    glyf = f.g.o
+    glyf = f.g.p
+    glyf = f.g.r
+    glyf = f.g.u
+    glyf = f.g.v
+    glyf = f.g.w
+    plt.figure(figsize=(5, 5))
     ax = plt.subplot(111, aspect='equal')
     for contour in glyf.contours:
         ax.plot(contour.xs, contour.ys, color='black', )
+    for c in glyf.contours: print(min(c.ys))
     plt.show()
 
 
 if __name__ == '__main__':
-    # letter()
+    letter()
     # draw_h()
 
-    draw_alpha(200, 80, 20, 95, -10)
-    draw_alpha(70, 80, 30, 34, -10)
-    draw_alpha(20, 80, 45, 10, 15)
+    # draw_alpha(200, 80, 20, 95, -10)
+    # draw_alpha(70, 80, 30, 34, -10)
+    # draw_alpha(20, 80, 45, 10, 15)

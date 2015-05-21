@@ -10,20 +10,22 @@ class Bowl(ComponentGroup):
         super(Bowl, self).__init__(*args)
 
     def moveto_lower_bowl(self):
-        return [self.s * 2 + self.c,
-                self.si * tan(self.th),]
+        return [0,
+                self.rh * tan(self.ph),]
 
     def moveto_upper_bowl(self):
-        return [0,
-                self.height - self.si * tan(self.th)]
+        return [self.s * 2 + self.c,
+                self.height - self.rh * tan(self.ph)]
+
+    def moveto_upper_bowl_apex(self):
+        return [self.si,
+                self.height]
 
     @property
-    def lineto_upper_bowl_apex(self):
+    def linefrom_upper_bowl_apex(self):
         return Component(np.array([
-            [[1, 0],
-             [0, self.height - self.si * tan(self.th)]],
-            [[1, self.si],
-             [1, self.si * tan(self.th)]],
+            [[-1, self.si],
+             [-1, self.si * tan(self.th)]],
         ]))
 
     @property
@@ -31,11 +33,11 @@ class Bowl(ComponentGroup):
         _xx = (self.s * 2 + self.c) - self.si
         return Component([
             [[1, 0],
-             [0, self.si*tan(self.th)]],
-            [[-1, self.si],
-             [-1, self.si * tan(self.th)]],
-            [[-1, _xx],
-             [1, _xx * tan(self.ph)]]
+             [0, self.rh * tan(self.ph)]],
+            [[1, _xx],
+             [-1, _xx * tan(self.ph)]],
+            [[1, self.si],
+             [1, self.si * tan(self.th)]],
         ])
 
     @property
@@ -43,10 +45,10 @@ class Bowl(ComponentGroup):
         _xx = (self.s * 2 + self.c) - self.si
         return Component(np.array([
             [[1, 0],
-             [0, self.height - self.si * tan(self.th)]],
-            [[1, self.si],
-             [1, self.si * tan(self.th)]],
-            [[1, _xx],
-             [-1, _xx * tan(self.ph)]]
+             [0, self.height - self.rh * tan(self.ph)]],
+            [[-1, _xx],
+             [1, _xx * tan(self.ph)]],
+            [[-1, self.si],
+             [-1, self.si * tan(self.th)]],
         ]))
 
