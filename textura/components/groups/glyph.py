@@ -12,32 +12,29 @@ class Glyph(ComponentGroup):
 
     @property
     def d_ascent(self):
-        ang = math_pi / 2 - atan((2 * self.s + self.c) / self.ascent)
-        _xx = self.s + self.c + 2 * self.r * sin(ang)
+        a = atan(self.ascent / (2 * self.s + self.c))
+        _xx = self.s + self.c + 2 * self.r * sin(a)
         return Component(np.array([
             [[1, 0],
-             [0, self.height + self.ascent - _xx / tan(ang) -
-              2 * self.r * sin(ang)]],
-            [[-1, _xx],
-             [1, _xx / tan(ang)]],
-            [[1, 2 * self.r * cos(ang)],
-             [1, 2 * self.r * sin(ang)]],
-            [[1, 2 * self.s + self.c],
-             [-1, self.ascent]],
-            [[1, 0],
-             [0, self.si * tan(self.th)]],
+             [0, self.height]],
+            [[-1, 2 * self.s + self.c],
+             [1, (2 * self.s + self.c) * tan(a)]],
+            [[-1, 2 * self.r * sin(a)],
+             [-1, 2 * self.r * cos(a)]],
+            [[1, _xx],
+             [-1, _xx * tan(a)]],
         ]))
 
     @property
     def d_bowl(self):
-        ang = math_pi / 2 - atan((2 * self.s + self.c) / self.ascent)
-        _xx = self.s + self.c + 2 * self.r * sin(ang)
+        a = atan(self.ascent / (2 * self.s + self.c))
+        _xx = self.s + self.c + 2 * self.r * sin(a)
         return Component(np.array([
             [[1, 0],
-             [0, self.height + self.ascent - 2 * self.r * sin(ang) -
-              _xx / tan(ang) - self.s * tan(self.th)]],
-            [[1, self.s],
-             [1, self.s * tan(self.th)]]
+             [0, self.height + self.ascent - 2 * self.r * cos(a) -
+              _xx * tan(a)]],
+            [[-1, self.s],
+             [-1, self.s * tan(self.th)]]
         ]))
 
     @property

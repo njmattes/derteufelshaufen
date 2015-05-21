@@ -48,9 +48,9 @@ class Glyphs(object):
     def d(self):
         return Glyph([Contour([
             self.components.bowl.lower_bowl,
-            self.components.glyph.d_bowl,
+            self.components.glyph.d_ascent,
             self.components.counter.lower_counter,
-            self.components.glyph.d_ascent,],
+            self.components.glyph.d_bowl,],
             self.components.bowl.moveto_lower_bowl())])
 
     @property
