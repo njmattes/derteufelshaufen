@@ -10,8 +10,10 @@ class Extender(ComponentGroup):
         super(Extender, self).__init__(*args)
 
     def moveto_ascender(self):
-        return [0,
-                self.height + self.ascent - self.s * tan(self.th)]
+        return [0, self.height + self.ascent - self.s * tan(self.th)]
+
+    def moveto_descender(self):
+        return [0, -self.descent]
 
     @property
     def lineto_ascender(self):
