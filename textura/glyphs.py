@@ -173,8 +173,17 @@ class Glyphs(object):
 
     @property
     def q(self):
-        # TODO: Add q
-        return None
+        # TODO: Add upper right spike
+        return Glyph([
+            Contour([
+                self.components.glyph.q_bowl,
+                self.components.extender.descender,
+                self.components.bowl.upper_bowl],
+                self.components.bowl.moveto_lower_bowl()),
+            Contour([
+                self.components.counter.counter,],
+                self.components.counter.moveto_lower_counter(),
+                ccw=False)])
 
     @property
     def r(self):

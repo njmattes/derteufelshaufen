@@ -107,6 +107,17 @@ class Glyph(ComponentGroup):
         ]))
 
     @property
+    def q_bowl(self):
+        return Component(np.array([
+            [[1, 0],
+             [0, self.rh * tan(self.ph)]],
+            [[1, self.rh],
+             [0, 0]],
+            [[1, self.si - self.s],
+             [1, (self.si - self.s) * tan(self.th)]],
+        ]))
+
+    @property
     def w_bowl(self):
         _w = (3 * self.s + 2 * self.c) - (self.si + self.rh)
         _xx = _w / (1 + tan(self.th) / tan(self.ph))
