@@ -156,7 +156,7 @@ def letter():
 
 def all_letters(s, c, t, r, o=None):
     f = Font(s, c, t, r, o)
-    glyfs = [getattr(f.g, letter) for letter in 'bcdehilmnopruvw']
+    glyfs = [getattr(f.g, letter) for letter in 'bcdehilmnopqruvw']
     plt.figure(figsize=(24, 8))
     ax = plt.subplot(111, aspect='equal')
     x = 20
@@ -170,8 +170,8 @@ def all_letters(s, c, t, r, o=None):
 
 
 if __name__ == '__main__':
-    # all_letters(100, 90, 30, 48)
-    all_letters(20, 100, 25, 10, 15)
+    all_letters(100, 90, 30, 48)
+    # all_letters(20, 100, 25, 10, 15)
     # letter()
     # draw_h()
 
