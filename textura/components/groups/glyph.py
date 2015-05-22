@@ -58,8 +58,8 @@ class Glyph(ComponentGroup):
     @property
     def e_eye_counter(self):
         _a = self.si + self.rhs - self.s  # width of eye
-        _b = (_a - 2 * self.r * sin(self.phs)) - \
-             self.hairline * cos(self.phs)  # width of eye's counter
+        _b = ((_a - 2 * self.r * sin(self.phs)) -
+              self.hairline * cos(self.phs))  # width of eye's counter
         return Component(np.array([
             [[0, self.s],
              [0, self.height - (self.rhs * tan(self.phs) + _a / tan(self.phs)) +
@@ -72,7 +72,7 @@ class Glyph(ComponentGroup):
 
     @property
     def h_shoulder(self):
-        #TODO: Base shoulder on width of NW crotch in n
+        # TODO: Base shoulder on width of NW crotch in n
         return Component(np.array([
             [[-1, self.si - self.s],
              [-1, (self.si - self.s) * tan(self.th)]],
