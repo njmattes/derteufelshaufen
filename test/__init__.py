@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 from math import degrees, asin, sin
 import matplotlib.pyplot as plt
 from textura.font import Font
@@ -171,7 +172,8 @@ def all_letters(s, c, t, r, o=None, alpha=None):
             x -= s
         if i in [9, 11]:
             x += s
-    plt.savefig('{}{}{}{}.svg'.format(s, c, t, r))
+    plt.savefig(os.path.join('..', 'output',
+                             '{}-{}-{}-{}.svg'.format(s, c, t, r)))
     plt.show()
 
 
