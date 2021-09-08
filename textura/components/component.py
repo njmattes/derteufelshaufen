@@ -16,8 +16,8 @@ class Component(object):
 
     @property
     def xs(self):
-        return [x[:,0] for x in self.coords]
+        return [x[:, 0] for x in self.coords]
 
     @property
     def ys(self):
-        return [x[:,1] for x in self.coords]
+        return [x[:, 1] for x in self.coords]

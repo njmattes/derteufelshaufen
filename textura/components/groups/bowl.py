@@ -23,6 +23,11 @@ class Bowl(ComponentGroup):
 
     @property
     def linefrom_upper_bowl_apex(self):
+        """
+
+        :return:
+        :rtype:
+        """
         return Component(np.array([
             [[-1, self.si],
              [-1, self.si * tan(self.th)]],
@@ -30,6 +35,11 @@ class Bowl(ComponentGroup):
 
     @property
     def lower_bowl(self):
+        """Contour components for lower bowl [eg: b, o]
+
+        :return:
+        :rtype:
+        """
         _xx = (self.s * 2 + self.c) - self.si
         return Component([
             [[1, 0],
@@ -42,6 +52,16 @@ class Bowl(ComponentGroup):
 
     @property
     def upper_bowl(self):
+        """Contour components for upper bowl [eg: a, o]
+
+
+
+           _—¯—_
+        _—¯|¯—_ ¯—_
+
+        :return:
+        :rtype:
+        """
         _xx = (self.s * 2 + self.c) - self.si
         return Component(np.array([
             [[1, 0],

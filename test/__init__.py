@@ -12,7 +12,7 @@ def draw(g, ax):
     #     ax.plot(c[0], c[1], color='black', )
 
 def draw_alpha(s, c, a, r, x):
-    plt.figure(figsize=(24, 4))
+    plt.figure(figsize=(24, 3))
     n = 9
 
     f = Font(s, c, a, radius=r, x=x)
@@ -154,27 +154,40 @@ def letter():
     for c in glyf.contours: print(min(c.ys))
     plt.show()
 
-def all_letters(s, c, t, r, o=None):
+def all_letters(s, c, t, r, o=None, alpha=None):
     f = Font(s, c, t, r, o)
-    glyfs = [getattr(f.g, letter) for letter in 'bcdehilmnopqruvw']
+    alpha = 'bcdehilmnopqruvw' if alpha is None else alpha
+    glyfs = [getattr(f.g, letter) for letter in alpha]
     plt.figure(figsize=(24, 8))
     ax = plt.subplot(111, aspect='equal')
     x = 20
-    for glyf in glyfs:
+    for i, glyf in enumerate(glyfs):
         w = (max([max(contour.xs) for contour in glyf.contours]) -
              min([min(contour.xs) for contour in glyf.contours])) + 20
         for contour in glyf.contours:
             ax.plot(contour.xs + x, contour.ys, color='black', )
         x += w
+        if i in [5, 7, 8, 10, 13]:
+            x -= s
+        if i in [9, 11]:
+            x += s
+    plt.savefig('{}{}{}{}.svg'.format(s, c, t, r))
     plt.show()
 
 
+
 if __name__ == '__main__':
-    all_letters(100, 90, 30, 48)
+    # all_letters(50, 120, 30, 20)
     # all_letters(20, 100, 25, 10, 15)
     # letter()
     # draw_h()
 
-    # draw_alpha(200, 80, 20, 95, -10)
     # draw_alpha(70, 80, 30, 34, -10)
+    # draw_alpha(200, 80, 20, 95, -10)
     # draw_alpha(20, 80, 45, 10, 15)
+
+
+    all_letters(50, 120, 30, 20, alpha='euphonic')
+    all_letters(75, 100, 25, 30, alpha='monophonic')
+    all_letters(100, 80, 35, 45, alpha='microphonic')
+    all_letters(20, 200, 45, 8, alpha='phonic')

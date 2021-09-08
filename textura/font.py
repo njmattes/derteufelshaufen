@@ -26,7 +26,6 @@ class Font(object):
         self.components = Components(self.construction)
         self.g = Glyphs(self.components)
 
-
     @property
     def theta(self):
         """Angle of top left corner of o (angle of 'pen' when drawing stems).
